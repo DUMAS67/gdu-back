@@ -1,0 +1,22 @@
+{"properties": [
+  {
+    "name": "app.version",
+    "type": "java.lang.String",
+    "description": "A description for 'app.version'"
+  },
+  {
+    "name": "jwt.cookie",
+    "type": "java.lang.String",
+    "description": "A description for 'jwt.cookie'"
+  },
+  {
+    "name": "jwt.expires_in",
+    "type": "java.lang.String",
+    "description": "A description for 'jwt.expires_in'"
+  },
+  {
+    "name": "jwt.secret",
+    "type": "java.lang.String",
+    "description": "A description for 'jwt.secret'"
+  }
+]}
