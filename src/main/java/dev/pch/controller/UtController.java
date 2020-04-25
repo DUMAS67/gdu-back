@@ -51,7 +51,7 @@ public class UtController {
 
 		// On vérifie si l'Ut existe
 		Optional<Ut> utNew = this.utRepo.findByNom(nom);
-		if (utNew.isPresent()) {
+		if (utNew.isPresent() && (nom != null) && (nom != "")) {
 			String messageErreur = "";
 			messageErreur = "Ut de nom : " + nom + " introuvable..";
 			LOG.error(messageErreur);

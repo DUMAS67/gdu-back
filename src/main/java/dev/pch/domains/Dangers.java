@@ -18,6 +18,11 @@ public class Dangers {
 	public Dangers() {
 	}
 
+	public Dangers(String nom) {
+		super();
+		this.nom = nom;
+	}
+
 	public Dangers(int id, String nom) {
 		super();
 		this.id = id;

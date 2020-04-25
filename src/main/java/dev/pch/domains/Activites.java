@@ -27,6 +27,11 @@ public class Activites {
 	public Activites() {
 	}
 
+	public Activites(String nom) {
+		super();
+		this.nom = nom;
+	}
+
 	public Activites(int id, String nom) {
 		super();
 		this.id = id;

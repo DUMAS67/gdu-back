@@ -50,7 +50,7 @@ public class LieuController {
 
 		// On vérifie si le lieu existe
 		Optional<Lieu> lieuNew = this.lieuRepo.findByNom(nom);
-		if (lieuNew.isPresent()) {
+		if (lieuNew.isPresent() && (nom != null) && (nom != "")) {
 			String messageErreur = "";
 			messageErreur = "Lieu de nom : " + nom + " introuvable..";
 			LOG.error(messageErreur);
