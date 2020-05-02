@@ -45,6 +45,14 @@ public class UtController {
 		return listeUt.stream().map(r -> new UtVM(r)).collect(Collectors.toList());
 	}
 
+	@RequestMapping(method = RequestMethod.GET, path = "ut")
+	public Optional<Ut> trouverUt(@RequestParam("id") int id) {
+		Optional<Ut> ut = this.utRepo.findById(id);
+		LOG.info(">>>> consulter l'Ut d'id : " + id);
+		LOG.info("-> " + ut.isPresent());
+		return ut;
+	}
+
 	@RequestMapping(method = RequestMethod.POST, path = "ut")
 	public ResponseEntity<String> creerUt(@RequestParam("nom") String nom) {
 		LOG.info(" Creer l'UT de nom : " + nom);

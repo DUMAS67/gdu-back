@@ -11,7 +11,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import dev.pch.domains.Activites;
-import dev.pch.domains.Criticite;
 import dev.pch.domains.Dangers;
 import dev.pch.domains.Frequence;
 import dev.pch.domains.Gravite;
@@ -20,15 +19,12 @@ import dev.pch.domains.Risques;
 import dev.pch.domains.Ut;
 import dev.pch.repository.ActivitesRepo;
 import dev.pch.repository.CollaborateurRepo;
-import dev.pch.repository.CriticiteRepo;
 import dev.pch.repository.DangersRepo;
 import dev.pch.repository.DuerRepo;
 import dev.pch.repository.FrequenceRepo;
 import dev.pch.repository.GraviteRepo;
 import dev.pch.repository.LieuRepo;
 import dev.pch.repository.PlanActionSpecifiqueRepo;
-import dev.pch.repository.PreventionExistanteRepo;
-import dev.pch.repository.PreventionMiseEnOeuvreRepo;
 import dev.pch.repository.RisquesRepo;
 import dev.pch.repository.UtRepo;
 
@@ -41,36 +37,29 @@ public class GduStartupListener {
 	private static final Logger LOG = LoggerFactory.getLogger(GduStartupListener.class);
 
 	private ActivitesRepo activitesRepo;
-	private CriticiteRepo criticiteRepo;
 	private DangersRepo dangerRepo;
 	private DuerRepo duerRepo;
 	private FrequenceRepo frequenceRepo;
 	private GraviteRepo graviteRepo;
 	private LieuRepo lieuRepo;
 	private PlanActionSpecifiqueRepo planActionSpecifiqueRepo;
-	private PreventionExistanteRepo preventionExistanteRepo;
-	private PreventionMiseEnOeuvreRepo preventionMiseEnOeuvreRepo;
 	private RisquesRepo risqueRepo;
 	private UtRepo utRepo;
 	private CollaborateurRepo collaborateurRepo;
 	private PasswordEncoder passwordEncoder;
 
-	public GduStartupListener(ActivitesRepo activitesRepo, CriticiteRepo criticiteRepo, DangersRepo dangerRepo,
-			DuerRepo duerRepo, FrequenceRepo frequenceRepo, GraviteRepo graviteRepo, LieuRepo lieuRepo,
-			PlanActionSpecifiqueRepo planActionSpecifiqueRepo, PreventionExistanteRepo preventionExistanteRepo,
-			PreventionMiseEnOeuvreRepo preventionMiseEnOeuvreRepo, RisquesRepo risqueRepo, UtRepo utRepo,
+	public GduStartupListener(ActivitesRepo activitesRepo, DangersRepo dangerRepo, DuerRepo duerRepo,
+			FrequenceRepo frequenceRepo, GraviteRepo graviteRepo, LieuRepo lieuRepo,
+			PlanActionSpecifiqueRepo planActionSpecifiqueRepo, RisquesRepo risqueRepo, UtRepo utRepo,
 			CollaborateurRepo collaborateurRepo, PasswordEncoder passwordEncoder) {
 		super();
 		this.activitesRepo = activitesRepo;
-		this.criticiteRepo = criticiteRepo;
 		this.dangerRepo = dangerRepo;
 		this.duerRepo = duerRepo;
 		this.frequenceRepo = frequenceRepo;
 		this.graviteRepo = graviteRepo;
 		this.lieuRepo = lieuRepo;
 		this.planActionSpecifiqueRepo = planActionSpecifiqueRepo;
-		this.preventionExistanteRepo = preventionExistanteRepo;
-		this.preventionMiseEnOeuvreRepo = preventionMiseEnOeuvreRepo;
 		this.risqueRepo = risqueRepo;
 		this.utRepo = utRepo;
 		this.collaborateurRepo = collaborateurRepo;
@@ -102,39 +91,6 @@ public class GduStartupListener {
 		this.frequenceRepo.save(frequence3);
 		Frequence frequence4 = new Frequence(4, 4);
 		this.frequenceRepo.save(frequence4);
-
-		Criticite criticite1 = new Criticite(1, gravite1.getValeur() * frequence1.getValeur());
-		this.criticiteRepo.save(criticite1);
-		Criticite criticite2 = new Criticite(2, gravite2.getValeur() * frequence1.getValeur());
-		this.criticiteRepo.save(criticite2);
-		Criticite criticite3 = new Criticite(3, gravite3.getValeur() * frequence1.getValeur());
-		this.criticiteRepo.save(criticite3);
-		Criticite criticite4 = new Criticite(4, gravite4.getValeur() * frequence1.getValeur());
-		this.criticiteRepo.save(criticite4);
-		Criticite criticite5 = new Criticite(5, gravite1.getValeur() * frequence2.getValeur());
-		this.criticiteRepo.save(criticite5);
-		Criticite criticite6 = new Criticite(6, gravite2.getValeur() * frequence2.getValeur());
-		this.criticiteRepo.save(criticite6);
-		Criticite criticite7 = new Criticite(7, gravite3.getValeur() * frequence2.getValeur());
-		this.criticiteRepo.save(criticite7);
-		Criticite criticite8 = new Criticite(8, gravite4.getValeur() * frequence2.getValeur());
-		this.criticiteRepo.save(criticite8);
-		Criticite criticite9 = new Criticite(9, gravite1.getValeur() * frequence3.getValeur());
-		this.criticiteRepo.save(criticite9);
-		Criticite criticite10 = new Criticite(10, gravite2.getValeur() * frequence3.getValeur());
-		this.criticiteRepo.save(criticite10);
-		Criticite criticite11 = new Criticite(11, gravite3.getValeur() * frequence3.getValeur());
-		this.criticiteRepo.save(criticite11);
-		Criticite criticite12 = new Criticite(12, gravite4.getValeur() * frequence3.getValeur());
-		this.criticiteRepo.save(criticite12);
-		Criticite criticite13 = new Criticite(13, gravite1.getValeur() * frequence4.getValeur());
-		this.criticiteRepo.save(criticite13);
-		Criticite criticite14 = new Criticite(14, gravite2.getValeur() * frequence4.getValeur());
-		this.criticiteRepo.save(criticite14);
-		Criticite criticite15 = new Criticite(15, gravite3.getValeur() * frequence4.getValeur());
-		this.criticiteRepo.save(criticite15);
-		Criticite criticite16 = new Criticite(16, gravite4.getValeur() * frequence4.getValeur());
-		this.criticiteRepo.save(criticite16);
 
 		/* Valeurs Lieu */
 

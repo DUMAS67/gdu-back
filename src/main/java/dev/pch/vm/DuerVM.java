@@ -3,12 +3,13 @@
  */
 package dev.pch.vm;
 
+import dev.pch.domains.Activites;
 import dev.pch.domains.Dangers;
 import dev.pch.domains.Duer;
+import dev.pch.domains.Frequence;
+import dev.pch.domains.Gravite;
 import dev.pch.domains.Lieu;
 import dev.pch.domains.PlanActionSpecifique;
-import dev.pch.domains.PreventionExistante;
-import dev.pch.domains.PreventionMiseEnOeuvre;
 import dev.pch.domains.Risques;
 import dev.pch.domains.Ut;
 
@@ -19,22 +20,32 @@ import dev.pch.domains.Ut;
 public class DuerVM {
 
 	private int id;
-	private Ut uniteLieu;
+	private Ut ut;
 	private Lieu lieu;
+	private Activites activite;
 	private Dangers danger;
 	private Risques risque;
-	private PreventionExistante prevExistante;
-	private PreventionMiseEnOeuvre prevMiseEnOeuvre;
+	private Gravite graviteEx;
+	private Frequence frequenceEx;
+	private String prevExistante;
+	private Gravite graviteMo;
+	private Frequence frequenceMo;
+	private String prevMiseEnOeuvre;
 	private PlanActionSpecifique pas;
 
 	public DuerVM(Duer duer) {
 		super();
 		this.id = duer.getId();
-		this.uniteLieu = duer.getUniteLieu();
+		this.ut = duer.getUt();
 		this.lieu = duer.getLieu();
+		this.activite = duer.getActivite();
 		this.danger = duer.getDanger();
 		this.risque = duer.getRisque();
+		this.graviteEx = duer.getGravite_Ex();
+		this.frequenceEx = duer.getFrequence_Ex();
 		this.prevExistante = duer.getPrevExistante();
+		this.graviteMo = duer.getGravite_Mo();
+		this.frequenceMo = duer.getFrequence_Mo();
 		this.prevMiseEnOeuvre = duer.getPrevMiseEnOeuvre();
 		this.pas = duer.getPas();
 	}
@@ -55,18 +66,18 @@ public class DuerVM {
 	}
 
 	/**
-	 * @return the uniteLieu
+	 * @return the ut
 	 */
-	public Ut getUniteLieu() {
-		return uniteLieu;
+	public Ut getUt() {
+		return ut;
 	}
 
 	/**
-	 * @param uniteLieu
-	 *            the uniteLieu to set
+	 * @param ut
+	 *            the ut to set
 	 */
-	public void setUniteLieu(Ut uniteLieu) {
-		this.uniteLieu = uniteLieu;
+	public void setUt(Ut ut) {
+		this.ut = ut;
 	}
 
 	/**
@@ -82,6 +93,21 @@ public class DuerVM {
 	 */
 	public void setLieu(Lieu lieu) {
 		this.lieu = lieu;
+	}
+
+	/**
+	 * @return the activite
+	 */
+	public Activites getActivite() {
+		return activite;
+	}
+
+	/**
+	 * @param activite
+	 *            the activite to set
+	 */
+	public void setActivite(Activites activite) {
+		this.activite = activite;
 	}
 
 	/**
@@ -115,9 +141,39 @@ public class DuerVM {
 	}
 
 	/**
+	 * @return the graviteEx
+	 */
+	public Gravite getGraviteEx() {
+		return graviteEx;
+	}
+
+	/**
+	 * @param graviteEx
+	 *            the graviteEx to set
+	 */
+	public void setGraviteEx(Gravite graviteEx) {
+		this.graviteEx = graviteEx;
+	}
+
+	/**
+	 * @return the frequenceEx
+	 */
+	public Frequence getFrequenceEx() {
+		return frequenceEx;
+	}
+
+	/**
+	 * @param frequenceEx
+	 *            the frequenceEx to set
+	 */
+	public void setFrequenceEx(Frequence frequenceEx) {
+		this.frequenceEx = frequenceEx;
+	}
+
+	/**
 	 * @return the prevExistante
 	 */
-	public PreventionExistante getPrevExistante() {
+	public String getPrevExistante() {
 		return prevExistante;
 	}
 
@@ -125,14 +181,44 @@ public class DuerVM {
 	 * @param prevExistante
 	 *            the prevExistante to set
 	 */
-	public void setPrevExistante(PreventionExistante prevExistante) {
+	public void setPrevExistante(String prevExistante) {
 		this.prevExistante = prevExistante;
+	}
+
+	/**
+	 * @return the graviteMo
+	 */
+	public Gravite getGraviteMo() {
+		return graviteMo;
+	}
+
+	/**
+	 * @param graviteMo
+	 *            the graviteMo to set
+	 */
+	public void setGraviteMo(Gravite graviteMo) {
+		this.graviteMo = graviteMo;
+	}
+
+	/**
+	 * @return the frequenceMo
+	 */
+	public Frequence getFrequenceMo() {
+		return frequenceMo;
+	}
+
+	/**
+	 * @param frequenceMo
+	 *            the frequenceMo to set
+	 */
+	public void setFrequenceMo(Frequence frequenceMo) {
+		this.frequenceMo = frequenceMo;
 	}
 
 	/**
 	 * @return the prevMiseEnOeuvre
 	 */
-	public PreventionMiseEnOeuvre getPrevMiseEnOeuvre() {
+	public String getPrevMiseEnOeuvre() {
 		return prevMiseEnOeuvre;
 	}
 
@@ -140,7 +226,7 @@ public class DuerVM {
 	 * @param prevMiseEnOeuvre
 	 *            the prevMiseEnOeuvre to set
 	 */
-	public void setPrevMiseEnOeuvre(PreventionMiseEnOeuvre prevMiseEnOeuvre) {
+	public void setPrevMiseEnOeuvre(String prevMiseEnOeuvre) {
 		this.prevMiseEnOeuvre = prevMiseEnOeuvre;
 	}
 

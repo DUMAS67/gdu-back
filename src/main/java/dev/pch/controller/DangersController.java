@@ -44,6 +44,13 @@ public class DangersController {
 		return listeDangers.stream().map(r -> new DangersVM(r)).collect(Collectors.toList());
 	}
 
+	@RequestMapping(method = RequestMethod.GET, path = "danger")
+	public Optional<Dangers> trouverDangers(@RequestParam("id") int id) {
+		Optional<Dangers> danger = this.dangersRepo.findById(id);
+
+		return danger;
+	}
+
 	@RequestMapping(method = RequestMethod.POST, path = "danger")
 	public ResponseEntity<String> creerDanger(@RequestParam("nom") String nom) {
 		LOG.info(" Creer le danger de nom : " + nom);

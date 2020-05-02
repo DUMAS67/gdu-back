@@ -22,7 +22,7 @@ public class PlanActionSpecifique {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Integer id;
 	/** id du Plan d'Actions Spécifique */
 	@NotNull
 	@OneToOne
@@ -44,7 +44,7 @@ public class PlanActionSpecifique {
 	public PlanActionSpecifique() {
 	}
 
-	public PlanActionSpecifique(int id, Duer idDuer, String action, float budget, String qui, Date delai,
+	public PlanActionSpecifique(Integer id, Duer idDuer, String action, float budget, String qui, Date delai,
 			boolean etat) {
 		super();
 		this.id = id;
@@ -59,7 +59,7 @@ public class PlanActionSpecifique {
 	/**
 	 * @return the id
 	 */
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 

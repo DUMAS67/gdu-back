@@ -43,6 +43,13 @@ public class ActivitesController {
 		return listeActivites.stream().map(r -> new ActivitesVM(r)).collect(Collectors.toList());
 	}
 
+	@RequestMapping(method = RequestMethod.GET, path = "activite")
+	public Optional<Activites> trouverActivite(@RequestParam("id") int id) {
+		Optional<Activites> activite = this.activitesRepo.findById(id);
+
+		return activite;
+	}
+
 	@RequestMapping(method = RequestMethod.POST, path = "activite")
 	public ResponseEntity<String> creerActivite(@RequestParam("nom") String nom) {
 		LOG.info(" Creer l'Activité de nom : " + nom);
@@ -60,7 +67,7 @@ public class ActivitesController {
 			Activites nouvelleActivite = new Activites(nom);
 
 			this.activitesRepo.save(nouvelleActivite);
-			return ResponseEntity.status(HttpStatus.OK).body("Le lieu a été créé avec succès!");
+			return ResponseEntity.status(HttpStatus.OK).body("L'activité a été créé avec succès!");
 		}
 
 	}

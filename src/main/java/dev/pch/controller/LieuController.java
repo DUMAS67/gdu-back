@@ -44,6 +44,13 @@ public class LieuController {
 		return listeLieu.stream().map(r -> new LieuVM(r)).collect(Collectors.toList());
 	}
 
+	@RequestMapping(method = RequestMethod.GET, path = "lieu")
+	public Optional<Lieu> trouverLieu(@RequestParam("id") int id) {
+		Optional<Lieu> lieu = this.lieuRepo.findById(id);
+
+		return lieu;
+	}
+
 	@RequestMapping(method = RequestMethod.POST, path = "lieu")
 	public ResponseEntity<String> creerLieu(@RequestParam("nom") String nom) {
 		LOG.info(" Creer le lieu de nom : " + nom);

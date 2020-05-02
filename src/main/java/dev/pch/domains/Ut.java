@@ -17,7 +17,7 @@ import javax.persistence.Id;
 public class Ut {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Integer id;
 
 	/** id de la liste des Unité de Travail */
 	private String nom;
@@ -27,7 +27,7 @@ public class Ut {
 	public Ut() {
 	}
 
-	public Ut(int id, String nom) {
+	public Ut(Integer id, String nom) {
 		super();
 		this.id = id;
 		this.nom = nom;
@@ -41,7 +41,7 @@ public class Ut {
 	/**
 	 * @return the id
 	 */
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 

@@ -4,10 +4,12 @@
 package dev.pch.controller;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import dev.pch.domains.Risques;
@@ -20,7 +22,7 @@ import dev.pch.vm.RisquesVM;
  */
 
 @RestController
-@RequestMapping("/risques")
+
 public class RisquesControler {
 
 	private RisquesRepo risquesrepo;
@@ -30,7 +32,7 @@ public class RisquesControler {
 		this.risquesrepo = risquesrepo;
 	}
 
-	@GetMapping
+	@RequestMapping(method = RequestMethod.GET, path = "risques")
 	public List<RisquesVM> listerRisques() {
 		List<Risques> listeRisques = this.risquesrepo.findAll();
 		/*
@@ -40,14 +42,10 @@ public class RisquesControler {
 		return listeRisques.stream().map(r -> new RisquesVM(r)).collect(Collectors.toList());
 	}
 
-}
+	@RequestMapping(method = RequestMethod.GET, path = "risque")
+	public Optional<Risques> trouverRisque(@RequestParam("id") int id) {
+		Optional<Risques> risque = this.risquesrepo.findById(id);
 
-/**
- * Retourne la liste des chauffeurs
- * 
- * @RequestMapping(method = RequestMethod.GET, path = "chauffeurs") public
- *                        List<ChauffeurVM> getChauffeur() { List<Chauffeur>
- *                        listeChauffeurs = this.chffRepo.findAll(); return
- *                        listeChauffeurs.stream().map(col -> new
- *                        ChauffeurVM(col)).collect(Collectors.toList()); }
- */
+		return risque;
+	}
+}

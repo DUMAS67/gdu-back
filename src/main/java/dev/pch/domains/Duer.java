@@ -3,6 +3,8 @@
  */
 package dev.pch.domains;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,18 +23,23 @@ import javax.validation.constraints.NotNull;
 public class Duer {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Integer id;
 	/** id de chaque ligne de l'EvRP du DUER */
 	@NotNull
 	@ManyToOne
 	@JoinColumn(name = "ut_id")
-	private Ut uniteLieu;
+	private Ut ut;
 	/** renseigne l'Unité de Lieu */
 	@NotNull
 	@ManyToOne
 	@JoinColumn(name = "lieu_id")
 	private Lieu lieu;
 	/** renseigne sur le lieu ùu se trouve le risque */
+	@NotNull
+	@ManyToOne
+	@JoinColumn(name = "activite_id")
+	private Activites activite;
+	/** renseigne sur l'activité */
 	@NotNull
 	@ManyToOne
 	@JoinColumn(name = "danger_id")
@@ -44,59 +51,124 @@ public class Duer {
 	@JoinColumn(name = "risque_id")
 	private Risques risque;
 	/** renseigne sur le risque engendré */
+
 	@NotNull
-	@OneToOne
+	@ManyToOne
+	@JoinColumn(name = "graviteEx_id")
+	private Gravite gravite_Ex;
+	/** indique la gravité du risque pour la prévention existante */
+	@NotNull
+	@ManyToOne
+	@JoinColumn(name = "frequenceEx_id")
+	private Frequence frequence_Ex;
+	/** indique la fréquence du risque pour la prévention existante */
+
+	@NotNull
 	@JoinColumn(name = "prevExistante_id")
-	private PreventionExistante prevExistante;
+	private String prevExistante;
 	/** décrit la prévention existante */
 	@NotNull
-	@OneToOne
-	@JoinColumn(name = "prevOeuvre_id")
-	private PreventionMiseEnOeuvre prevMiseEnOeuvre;
-	/** décrit la prévention à mettre en oeuvre */
+	@ManyToOne
+	@JoinColumn(name = "graviteMo_id")
+	private Gravite gravite_Mo;
+	/** indique la gravité du risque pour la prévention existante */
 	@NotNull
+	@ManyToOne
+	@JoinColumn(name = "frequenceMo_id")
+	private Frequence frequence_Mo;
+	/** indique la fréquence du risque pour la prévention existante */
+
+	@NotNull
+	@JoinColumn(name = "prevOeuvre_id")
+	private String prevMiseEnOeuvre;
+	/** décrit la prévention à mettre en oeuvre */
+
 	@OneToOne
 	@JoinColumn(name = "pas_id")
 	private PlanActionSpecifique pas;
 
 	/** décrit le plan d'action spécifique */
 
+	@JoinColumn(name = "date_jour")
+	private LocalDateTime dateEvrp;
+
 	public Duer() {
 	}
 
-	public Duer(int id, Ut uniteLieu, Lieu lieu, Dangers danger, Risques risque, PreventionExistante prevExistante,
-			PreventionMiseEnOeuvre prevMiseEnOeuvre, PlanActionSpecifique pas) {
+	/**
+	 * @PostLoad private void postLoad() {
+	 *           this.criticite_Ex.setValeur(this.gravite_Mo.getValeur() *
+	 *           this.frequence_Ex.getValeur()); }
+	 */
+
+	public Duer(Integer id, @NotNull Ut ut, @NotNull Lieu lieu, @NotNull Activites activite, @NotNull Dangers danger,
+			@NotNull Risques risque, @NotNull Gravite gravite_Ex, @NotNull Frequence frequence_Ex,
+			@NotNull String prevExistante, @NotNull Gravite gravite_Mo, @NotNull Frequence frequence_Mo,
+			@NotNull String prevMiseEnOeuvre, PlanActionSpecifique pas, LocalDateTime dateEvrp) {
 		super();
 		this.id = id;
-		this.uniteLieu = uniteLieu;
+		this.ut = ut;
 		this.lieu = lieu;
+		this.activite = activite;
 		this.danger = danger;
 		this.risque = risque;
+		this.gravite_Ex = gravite_Ex;
+		this.frequence_Ex = frequence_Ex;
 		this.prevExistante = prevExistante;
+		this.gravite_Mo = gravite_Mo;
+		this.frequence_Mo = frequence_Mo;
 		this.prevMiseEnOeuvre = prevMiseEnOeuvre;
 		this.pas = pas;
+		this.dateEvrp = dateEvrp;
+	}
+
+	public Duer(@NotNull Ut ut, @NotNull Lieu lieu, @NotNull Activites activite, @NotNull Dangers danger,
+			@NotNull Risques risque, @NotNull Gravite gravite_Ex, @NotNull Frequence frequence_Ex,
+			@NotNull String prevExistante, @NotNull Gravite gravite_Mo, @NotNull Frequence frequence_Mo,
+			@NotNull String prevMiseEnOeuvre, LocalDateTime dateEvrp) {
+		super();
+		this.ut = ut;
+		this.lieu = lieu;
+		this.activite = activite;
+		this.danger = danger;
+		this.risque = risque;
+		this.gravite_Ex = gravite_Ex;
+		this.frequence_Ex = frequence_Ex;
+		this.prevExistante = prevExistante;
+		this.gravite_Mo = gravite_Mo;
+		this.frequence_Mo = frequence_Mo;
+		this.prevMiseEnOeuvre = prevMiseEnOeuvre;
+		this.dateEvrp = dateEvrp;
 	}
 
 	/**
 	 * @return the id
 	 */
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
 	/**
-	 * @return the uniteLieu
+	 * @param id
+	 *            the id to set
 	 */
-	public Ut getUniteLieu() {
-		return uniteLieu;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	/**
-	 * @param uniteLieu
-	 *            the uniteLieu to set
+	 * @return the ut
 	 */
-	public void setUniteLieu(Ut uniteLieu) {
-		this.uniteLieu = uniteLieu;
+	public Ut getUt() {
+		return ut;
+	}
+
+	/**
+	 * @param ut
+	 *            the ut to set
+	 */
+	public void setUt(Ut ut) {
+		this.ut = ut;
 	}
 
 	/**
@@ -112,6 +184,21 @@ public class Duer {
 	 */
 	public void setLieu(Lieu lieu) {
 		this.lieu = lieu;
+	}
+
+	/**
+	 * @return the activite
+	 */
+	public Activites getActivite() {
+		return activite;
+	}
+
+	/**
+	 * @param activite
+	 *            the activite to set
+	 */
+	public void setActivite(Activites activite) {
+		this.activite = activite;
 	}
 
 	/**
@@ -145,9 +232,39 @@ public class Duer {
 	}
 
 	/**
+	 * @return the gravite_Ex
+	 */
+	public Gravite getGravite_Ex() {
+		return gravite_Ex;
+	}
+
+	/**
+	 * @param gravite_Ex
+	 *            the gravite_Ex to set
+	 */
+	public void setGravite_Ex(Gravite gravite_Ex) {
+		this.gravite_Ex = gravite_Ex;
+	}
+
+	/**
+	 * @return the frequence_Ex
+	 */
+	public Frequence getFrequence_Ex() {
+		return frequence_Ex;
+	}
+
+	/**
+	 * @param frequence_Ex
+	 *            the frequence_Ex to set
+	 */
+	public void setFrequence_Ex(Frequence frequence_Ex) {
+		this.frequence_Ex = frequence_Ex;
+	}
+
+	/**
 	 * @return the prevExistante
 	 */
-	public PreventionExistante getPrevExistante() {
+	public String getPrevExistante() {
 		return prevExistante;
 	}
 
@@ -155,14 +272,44 @@ public class Duer {
 	 * @param prevExistante
 	 *            the prevExistante to set
 	 */
-	public void setPrevExistante(PreventionExistante prevExistante) {
+	public void setPrevExistante(String prevExistante) {
 		this.prevExistante = prevExistante;
+	}
+
+	/**
+	 * @return the gravite_Mo
+	 */
+	public Gravite getGravite_Mo() {
+		return gravite_Mo;
+	}
+
+	/**
+	 * @param gravite_Mo
+	 *            the gravite_Mo to set
+	 */
+	public void setGravite_Mo(Gravite gravite_Mo) {
+		this.gravite_Mo = gravite_Mo;
+	}
+
+	/**
+	 * @return the frequence_Mo
+	 */
+	public Frequence getFrequence_Mo() {
+		return frequence_Mo;
+	}
+
+	/**
+	 * @param frequence_Mo
+	 *            the frequence_Mo to set
+	 */
+	public void setFrequence_Mo(Frequence frequence_Mo) {
+		this.frequence_Mo = frequence_Mo;
 	}
 
 	/**
 	 * @return the prevMiseEnOeuvre
 	 */
-	public PreventionMiseEnOeuvre getPrevMiseEnOeuvre() {
+	public String getPrevMiseEnOeuvre() {
 		return prevMiseEnOeuvre;
 	}
 
@@ -170,7 +317,7 @@ public class Duer {
 	 * @param prevMiseEnOeuvre
 	 *            the prevMiseEnOeuvre to set
 	 */
-	public void setPrevMiseEnOeuvre(PreventionMiseEnOeuvre prevMiseEnOeuvre) {
+	public void setPrevMiseEnOeuvre(String prevMiseEnOeuvre) {
 		this.prevMiseEnOeuvre = prevMiseEnOeuvre;
 	}
 
@@ -187,6 +334,21 @@ public class Duer {
 	 */
 	public void setPas(PlanActionSpecifique pas) {
 		this.pas = pas;
+	}
+
+	/**
+	 * @return the dateEvrp
+	 */
+	public LocalDateTime getDateEvrp() {
+		return dateEvrp;
+	}
+
+	/**
+	 * @param dateEvrp
+	 *            the dateEvrp to set
+	 */
+	public void setDateEvrp(LocalDateTime dateEvrp) {
+		this.dateEvrp = dateEvrp;
 	}
 
 }
