@@ -59,22 +59,26 @@ public class LieuController {
 		Optional<Lieu> lieuNew = this.lieuRepo.findByNom(nom);
 		if (lieuNew.isPresent() && (nom != null) && (nom != "")) {
 			String messageErreur = "";
-			messageErreur = "Lieu de nom : " + nom + " introuvable..";
+			messageErreur = "Lieu de nom : " + nom + " exite déjà et/ou données incohérentes";
 			LOG.error(messageErreur);
 			// throw new ElementNotFoundException(messageErreur);
 			return ResponseEntity.status(HttpStatus.CONFLICT).body(messageErreur);
 		} else {
-			LOG.info(">>>> Creer le lieu de nom : " + nom);
-			Lieu nouveauLieu = new Lieu(nom);
+			if (!lieuNew.isPresent() && (nom != null) && (nom != "")) {
 
-			this.lieuRepo.save(nouveauLieu);
-			return ResponseEntity.status(HttpStatus.OK).body("Le lieu a été créé avec succès!");
+				LOG.info(">>>> Creer le lieu de nom : " + nom);
+				Lieu nouveauLieu = new Lieu(nom);
+
+				this.lieuRepo.save(nouveauLieu);
+				return ResponseEntity.status(HttpStatus.OK).body("Le lieu a été créé avec succès!");
+			} else {
+				return ResponseEntity.status(HttpStatus.CONFLICT).body("Le libellé est incohérent");
+			}
 		}
-
 	}
 
 	@RequestMapping(method = RequestMethod.POST, path = "lieum")
-	public ResponseEntity<String> creerLieu(@RequestParam("id") Integer idav, @RequestParam("nomap") String nomap) {
+	public ResponseEntity<String> modifierLieu(@RequestParam("id") Integer idav, @RequestParam("nomap") String nomap) {
 		LOG.info(" Modifier le Lieu d'id: " + idav);
 
 		// On vérifie si le lieu existe

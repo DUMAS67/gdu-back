@@ -24,6 +24,7 @@ import dev.pch.domains.Activites;
 import dev.pch.domains.Dangers;
 import dev.pch.domains.Duer;
 import dev.pch.domains.DuerClef;
+import dev.pch.domains.DuerFront;
 import dev.pch.domains.Frequence;
 import dev.pch.domains.Gravite;
 import dev.pch.domains.Lieu;
@@ -82,6 +83,35 @@ public class DuerController {
 		List<Duer> listeDuer = this.duerRepo.findAll();
 
 		return listeDuer.stream().map(r -> new DuerVM(r)).collect(Collectors.toList());
+	}
+
+	@RequestMapping(method = RequestMethod.GET, path = "duerf")
+	public List<DuerFront> listerDuerFront() {
+		List<Duer> listeDuer = this.duerRepo.findAll();
+
+		return listeDuer.stream().map(r -> changeFront(r)).collect(Collectors.toList());
+	}
+
+	public DuerFront changeFront(Duer duer) {
+
+		DuerFront duerFront = new DuerFront(null, null, null, null, null, null, null, null, null, null, null, null,
+				null, null);
+		duerFront.setId(duer.getId());
+		duerFront.setUt(duer.getUt().getNom());
+		duerFront.setLieu(duer.getLieu().getNom());
+		duerFront.setActivite(duer.getActivite().getNom());
+		duerFront.setDanger(duer.getDanger().getNom());
+		duerFront.setRisque(duer.getRisque().getNom());
+		duerFront.setGravite_Ex(duer.getGravite_Ex().getValeur());
+		duerFront.setFrequence_Ex(duer.getFrequence_Ex().getValeur());
+		duerFront.setPrevExistante(duer.getPrevExistante());
+		duerFront.setGravite_Mo(duer.getGravite_Mo().getValeur());
+		duerFront.setFrequence_Mo(duer.getFrequence_Mo().getValeur());
+		duerFront.setPrevMiseEnOeuvre(duer.getPrevMiseEnOeuvre());
+		if (duer.getPas() != null) {duerFront.setPas(duer.getPas().getId());};
+		duerFront.setDateEvrp(duer.getDateEvrp());
+
+		return duerFront;
 	}
 
 	@RequestMapping(method = RequestMethod.GET, path = "duer")

@@ -58,22 +58,26 @@ public class ActivitesController {
 		Optional<Activites> activiteNew = this.activitesRepo.findByNom(nom);
 		if (activiteNew.isPresent() && (nom != null) && (nom != "")) {
 			String messageErreur = "";
-			messageErreur = "Lieu d'Activité : " + nom + " introuvable..";
+			messageErreur = "Lieu d'Activité : " + nom + " existe déjà et/ou données incohérentes";
 			LOG.error(messageErreur);
 			// throw new ElementNotFoundException(messageErreur);
 			return ResponseEntity.status(HttpStatus.CONFLICT).body(messageErreur);
 		} else {
-			LOG.info(">>>> Creer l'activité de nom : " + nom);
-			Activites nouvelleActivite = new Activites(nom);
+			if (!activiteNew.isPresent() && (nom != null) && (nom != "")) {
+				LOG.info(">>>> Creer l'activité de nom : " + nom);
+				Activites nouvelleActivite = new Activites(nom);
 
-			this.activitesRepo.save(nouvelleActivite);
-			return ResponseEntity.status(HttpStatus.OK).body("L'activité a été créé avec succès!");
+				this.activitesRepo.save(nouvelleActivite);
+				return ResponseEntity.status(HttpStatus.OK).body("L'activité a été créé avec succès!");
+			} else {
+				return ResponseEntity.status(HttpStatus.CONFLICT).body("Le libellé est incohérent");
+			}
 		}
-
 	}
 
 	@RequestMapping(method = RequestMethod.POST, path = "activitem")
-	public ResponseEntity<String> creerActivite(@RequestParam("id") Integer idav, @RequestParam("nomap") String nomap) {
+	public ResponseEntity<String> modifierActivite(@RequestParam("id") Integer idav,
+			@RequestParam("nomap") String nomap) {
 		LOG.info(" Modifier l'Activité d'id: " + idav);
 
 		// On vérifie si le l'activié existe

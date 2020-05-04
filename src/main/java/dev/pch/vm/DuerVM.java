@@ -3,6 +3,8 @@
  */
 package dev.pch.vm;
 
+import java.time.LocalDateTime;
+
 import dev.pch.domains.Activites;
 import dev.pch.domains.Dangers;
 import dev.pch.domains.Duer;
@@ -32,6 +34,7 @@ public class DuerVM {
 	private Frequence frequenceMo;
 	private String prevMiseEnOeuvre;
 	private PlanActionSpecifique pas;
+	private LocalDateTime dateEvrp;
 
 	public DuerVM(Duer duer) {
 		super();
@@ -48,6 +51,22 @@ public class DuerVM {
 		this.frequenceMo = duer.getFrequence_Mo();
 		this.prevMiseEnOeuvre = duer.getPrevMiseEnOeuvre();
 		this.pas = duer.getPas();
+		this.dateEvrp = duer.getDateEvrp();
+	}
+
+	/**
+	 * @return the dateEvrp
+	 */
+	public LocalDateTime getDateEvrp() {
+		return dateEvrp;
+	}
+
+	/**
+	 * @param dateEvrp
+	 *            the dateEvrp to set
+	 */
+	public void setDateEvrp(LocalDateTime dateEvrp) {
+		this.dateEvrp = dateEvrp;
 	}
 
 	/**

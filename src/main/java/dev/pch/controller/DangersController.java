@@ -59,22 +59,28 @@ public class DangersController {
 		Optional<Dangers> dangerNew = this.dangersRepo.findByNom(nom);
 		if (dangerNew.isPresent() && (nom != null) && (nom != "")) {
 			String messageErreur = "";
-			messageErreur = "Danger de nom : " + nom + " introuvable..";
+			messageErreur = "Danger de nom : " + nom + " existe déjà et/ou données incohérentes";
 			LOG.error(messageErreur);
 			// throw new ElementNotFoundException(messageErreur);
 			return ResponseEntity.status(HttpStatus.CONFLICT).body(messageErreur);
-		} else {
-			LOG.info(">>>> Creer le Danger de nom : " + nom);
-			Dangers nouveauDanger = new Dangers(nom);
 
-			this.dangersRepo.save(nouveauDanger);
-			return ResponseEntity.status(HttpStatus.OK).body("Le danger a été créé avec succès!");
+		} else {
+			if (!dangerNew.isPresent() && (nom != null) && (nom != "")) {
+
+				LOG.info(">>>> Creer le Danger de nom : " + nom);
+				Dangers nouveauDanger = new Dangers(nom);
+				this.dangersRepo.save(nouveauDanger);
+				return ResponseEntity.status(HttpStatus.OK).body("Le danger a été créé avec succès!");
+			} else {
+				return ResponseEntity.status(HttpStatus.CONFLICT).body("Le libellé est incohérent");
+			}
 		}
 
 	}
 
 	@RequestMapping(method = RequestMethod.POST, path = "dangerm")
-	public ResponseEntity<String> creerDanger(@RequestParam("id") Integer idav, @RequestParam("nomap") String nomap) {
+	public ResponseEntity<String> modifierDanger(@RequestParam("id") Integer idav,
+			@RequestParam("nomap") String nomap) {
 		LOG.info(" Modifier le Danger d'id: " + idav);
 
 		// On vérifie si le lieu existe

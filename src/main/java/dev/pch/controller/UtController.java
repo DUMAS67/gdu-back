@@ -61,23 +61,26 @@ public class UtController {
 		Optional<Ut> utNew = this.utRepo.findByNom(nom);
 		if (utNew.isPresent() && (nom != null) && (nom != "")) {
 			String messageErreur = "";
-			messageErreur = "Ut de nom : " + nom + " introuvable..";
+			messageErreur = "Ut de nom : " + nom + " exite déjà et/ou libellé incohérent";
 			LOG.error(messageErreur);
 			// throw new ElementNotFoundException(messageErreur);
 			return ResponseEntity.status(HttpStatus.CONFLICT).body(messageErreur);
 		} else {
-			LOG.info(">>>> Creer l'Ut de nom : " + nom);
-			// Creer l'UT
-			Ut nouvelleUt = new Ut(nom);
+			if (!utNew.isPresent() && (nom != null) && (nom != "")) {
+				LOG.info(">>>> Creer l'Ut de nom : " + nom);
+				// Creer l'UT
+				Ut nouvelleUt = new Ut(nom);
 
-			this.utRepo.save(nouvelleUt);
-			return ResponseEntity.status(HttpStatus.OK).body("L'Ut a été créé avec succès!");
+				this.utRepo.save(nouvelleUt);
+				return ResponseEntity.status(HttpStatus.OK).body("L'Ut a été créé avec succès!");
+			} else {
+				return ResponseEntity.status(HttpStatus.CONFLICT).body("Les données de l'Ut ne sont pas cohérentes");
+			}
 		}
-
 	}
 
 	@RequestMapping(method = RequestMethod.POST, path = "utm")
-	public ResponseEntity<String> creerUt(@RequestParam("id") Integer idav, @RequestParam("nomap") String nomap) {
+	public ResponseEntity<String> modifierUt(@RequestParam("id") Integer idav, @RequestParam("nomap") String nomap) {
 		LOG.info(" Modifier l'UT d'id: " + idav);
 
 		// On vérifie si l'Ut existe
