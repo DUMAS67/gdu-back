@@ -17,10 +17,13 @@ import dev.pch.domains.Ut;
  */
 public interface DuerRepo extends JpaRepository<Duer, Integer> {
 
-	Optional<Duer> findById(int id);
+	@Override
+	Optional<Duer> findById(Integer id);
 
 	Optional<Duer> findByUt(Ut ut);
 
 	List<Duer> findAllByUt(Ut ut);
+
+	void deleteById(int id);
 
 }

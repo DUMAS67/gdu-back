@@ -3,7 +3,7 @@
  */
 package dev.pch.domains;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -35,7 +35,7 @@ public class PlanActionSpecifique {
 	/** Budget prévisionnel de l'action spécifique */
 	private String qui;
 	/** Décrit la personne responsable de l'action */
-	private Date delai;
+	private LocalDateTime delai;
 	/** Donne le délai de mise en place de l'Action */
 	private boolean etat;
 
@@ -44,8 +44,8 @@ public class PlanActionSpecifique {
 	public PlanActionSpecifique() {
 	}
 
-	public PlanActionSpecifique(Integer id, Duer idDuer, String action, float budget, String qui, Date delai,
-			boolean etat) {
+	public PlanActionSpecifique(Integer id, @NotNull Duer idDuer, String action, float budget, String qui,
+			LocalDateTime delai, boolean etat) {
 		super();
 		this.id = id;
 		this.idDuer = idDuer;
@@ -64,7 +64,15 @@ public class PlanActionSpecifique {
 	}
 
 	/**
-	 * @return the id
+	 * @param id
+	 *            the id to set
+	 */
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	/**
+	 * @return the idDuer
 	 */
 	public Duer getIdDuer() {
 		return idDuer;
@@ -126,7 +134,7 @@ public class PlanActionSpecifique {
 	/**
 	 * @return the delai
 	 */
-	public Date getDelai() {
+	public LocalDateTime getDelai() {
 		return delai;
 	}
 
@@ -134,7 +142,7 @@ public class PlanActionSpecifique {
 	 * @param delai
 	 *            the delai to set
 	 */
-	public void setDelai(Date delai) {
+	public void setDelai(LocalDateTime delai) {
 		this.delai = delai;
 	}
 

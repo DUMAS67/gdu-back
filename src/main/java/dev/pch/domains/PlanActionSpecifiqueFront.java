@@ -1,42 +1,43 @@
 /**
  * 
  */
-package dev.pch.vm;
+package dev.pch.domains;
 
 import java.time.LocalDateTime;
-
-import dev.pch.domains.Duer;
-import dev.pch.domains.PlanActionSpecifique;
 
 /**
  * @author Thierry Dumas
  *
  */
-public class PlanActionSpecifiqueVM {
+public class PlanActionSpecifiqueFront {
 
 	private Integer id;
-	private Duer idDuer;
+	private Integer idDuer;
 	private String action;
 	private float budget;
 	private String qui;
 	private LocalDateTime delai;
 	private boolean etat;
 
-	public PlanActionSpecifiqueVM(PlanActionSpecifique pas) {
+	public PlanActionSpecifiqueFront() {
+	}
+
+	public PlanActionSpecifiqueFront(Integer id, Integer idDuer, String action, float budget, String qui,
+			LocalDateTime delai, boolean etat) {
 		super();
-		this.id = pas.getId();
-		this.idDuer = pas.getIdDuer();
-		this.action = pas.getAction();
-		this.budget = pas.getBudget();
-		this.qui = pas.getQui();
-		this.delai = pas.getDelai();
-		this.etat = pas.isEtat();
+		this.id = id;
+		this.idDuer = idDuer;
+		this.action = action;
+		this.budget = budget;
+		this.qui = qui;
+		this.delai = delai;
+		this.etat = etat;
 	}
 
 	/**
 	 * @return the id
 	 */
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
@@ -44,14 +45,14 @@ public class PlanActionSpecifiqueVM {
 	 * @param id
 	 *            the id to set
 	 */
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
 	/**
 	 * @return the idDuer
 	 */
-	public Duer getIdDuer() {
+	public Integer getIdDuer() {
 		return idDuer;
 	}
 
@@ -59,7 +60,7 @@ public class PlanActionSpecifiqueVM {
 	 * @param idDuer
 	 *            the idDuer to set
 	 */
-	public void setIdDuer(Duer idDuer) {
+	public void setIdDuer(Integer idDuer) {
 		this.idDuer = idDuer;
 	}
 

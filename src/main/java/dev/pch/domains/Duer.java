@@ -122,6 +122,12 @@ public class Duer {
 		this.dateEvrp = dateEvrp;
 	}
 
+	public Duer(Integer id, PlanActionSpecifique pas) {
+		super();
+		this.id = id;
+		this.pas = pas;
+	}
+
 	public Duer(@NotNull Ut ut, @NotNull Lieu lieu, @NotNull Activites activite, @NotNull Dangers danger,
 			@NotNull Risques risque, @NotNull Gravite gravite_Ex, @NotNull Frequence frequence_Ex,
 			@NotNull String prevExistante, @NotNull Gravite gravite_Mo, @NotNull Frequence frequence_Mo,

@@ -80,6 +80,7 @@ public class DuerController {
 
 	}
 
+	/* Donne la liste des DUER */
 	@RequestMapping(method = RequestMethod.GET, path = "duers")
 	public List<DuerVM> listerDuer() {
 		List<Duer> listeDuer = this.duerRepo.findAll();
@@ -87,6 +88,7 @@ public class DuerController {
 		return listeDuer.stream().map(r -> new DuerVM(r)).collect(Collectors.toList());
 	}
 
+	/* Donne la liste du Duer qui sera affichée dans le Front */
 	@RequestMapping(method = RequestMethod.GET, path = "duerf")
 	public List<DuerFront> listerDuerFront() {
 		List<Duer> listeDuer = this.duerRepo.findAll();
@@ -125,6 +127,7 @@ public class DuerController {
 		return duer;
 	}
 
+	/* Création d'une EVRP */
 	@Transactional
 	@RequestMapping(method = RequestMethod.POST, path = "duer")
 	public ResponseEntity<String> creerDuer(@RequestBody DuerClef duerClef) {
@@ -278,6 +281,110 @@ public class DuerController {
 		}
 	}
 
+	/*
+	 * Modifier les gravités, fréquences et preventions pour l'existant et la
+	 * mise en oeuvre
+	 */
+	@Transactional
+	@RequestMapping(method = RequestMethod.POST, path = "duerm")
+	public ResponseEntity<String> modifierDuer(@RequestParam("id") int id, @RequestParam("grEx") int gravite_Ex,
+			@RequestParam("frEx") int frequence_Ex, @RequestParam("prev") String prevention_Ex,
+			@RequestParam("grMo") int gravite_Mo, @RequestParam("frMo") int frequence_Mo,
+			@RequestParam("prevMo") String prevention_Mo) {
+
+		// On vérifie si l'Id du Duer que l'on veut modifier existe
+		Optional<Duer> idEx = this.duerRepo.findById(id);
+		if (idEx.isPresent()) {
+			LOG.info(">>>> Modification du Duer d' Id : " + id);
+
+			if ((Integer.valueOf(gravite_Ex) != null) && (Integer.valueOf(gravite_Mo) != null)
+					&& (Integer.valueOf(frequence_Ex) != null) && (Integer.valueOf(frequence_Mo) != null)
+					&& (prevention_Ex != null) && (prevention_Mo != null) && (!prevention_Ex.trim().isEmpty())
+					&& (!prevention_Mo.trim().isEmpty())) {
+
+				// On vérifie si la gravite Ex existe
+				Optional<Gravite> gr1New = this.graviteRepo.findById(gravite_Ex);
+				if (!gr1New.isPresent()) {
+					String messageErreur = "";
+					messageErreur = "Gravite Ex n'existe pas ou est null..";
+					LOG.error(messageErreur);
+					throw new ElementNotFoundException(messageErreur);
+				} else {
+					LOG.info(">>>> Modifier la gravité Ex d'Id : " + gravite_Ex);
+				}
+				// On vérifie si la Fréquence Ex existe
+				Optional<Frequence> fr1New = this.frequenceRepo.findById(frequence_Ex);
+				if (!fr1New.isPresent()) {
+					String messageErreur = "";
+					messageErreur = "Frequence Ex n'existe pas ou est null..";
+					LOG.error(messageErreur);
+					throw new ElementNotFoundException(messageErreur);
+				} else {
+					LOG.info(">>>> Modifier la Frequence Ex d'Id : " + frequence_Ex);
+				}
+
+				// On vérifie si la gravite Mo existe
+				Optional<Gravite> gr1oNew = this.graviteRepo.findById(gravite_Mo);
+				if (!gr1oNew.isPresent()) {
+					String messageErreur = "";
+					messageErreur = "Gravite Mo n'existe pas ou est null..";
+					LOG.error(messageErreur);
+					throw new ElementNotFoundException(messageErreur);
+				} else {
+					LOG.info(">>>> Modifier la gravité Mo d'Id : " + gravite_Mo);
+				}
+				// On vérifie si la Fréquence Mo existe
+				Optional<Frequence> fr1oNew = this.frequenceRepo.findById(frequence_Mo);
+				if (!fr1oNew.isPresent()) {
+					String messageErreur = "";
+					messageErreur = "Frequence Mo n'existe pas ou est null..";
+					LOG.error(messageErreur);
+					throw new ElementNotFoundException(messageErreur);
+				} else {
+					LOG.info(">>>> Modiifier la Frequence Mo d'Id : " + frequence_Mo);
+				}
+
+				if (idEx.isPresent() && gr1New.isPresent() && fr1New.isPresent() && gr1oNew.isPresent()
+						&& fr1oNew.isPresent() && (!prevention_Ex.trim().isEmpty())
+						&& (!prevention_Mo.trim().isEmpty())) {
+					Duer duerEx = idEx.get();
+
+					this.duerRepo.save(new Duer(duerEx.getId(), duerEx.getUt(), duerEx.getLieu(), duerEx.getActivite(),
+							duerEx.getDanger(), duerEx.getRisque(), gr1New.get(), fr1New.get(), prevention_Ex,
+							gr1oNew.get(), fr1oNew.get(), prevention_Mo, duerEx.getPas(), duerEx.getDateEvrp()));
+					return ResponseEntity.status(HttpStatus.OK).body("Le Duer a été modifié avec succès!");
+				} else {
+					return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+							.body("1 La requète est mal formulée ! Les données ne sont pas cohérentes");
+				}
+
+			} else {
+
+				return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+						.body("2 La requète est mal formulée ! Les données ne sont pas cohérentes");
+			}
+
+		} else {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+					.body("Le Duer n'a pu être modifié! La requète est mal formulée !");
+		}
+	}
+
+	/* Détruit un Evrp */
+	@Transactional
+	@RequestMapping(method = RequestMethod.POST, path = "duerd")
+	public ResponseEntity<String> detruireEvrp(@RequestParam("id") int id) {
+		// On vérifie si l'Id du Duer que l'on veut detruirre existe
+		Optional<Duer> idEx = this.duerRepo.findById(id);
+		if (idEx.isPresent()) {
+			LOG.info(">>>> Destruction de l'Evrp d' Id : " + id);
+			this.duerRepo.deleteById(id);
+			return ResponseEntity.status(HttpStatus.OK).body(">>>> Evrp détruit Mo d'Id : ");
+		} else {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("L'Evrp a détruire n'existe pas !");
+		}
+	}
+
 	/* trouver les criticités existantes dans la liste des Duer */
 	@RequestMapping(method = RequestMethod.GET, path = "duerc")
 	public List<Integer> trouverCriticite() {
@@ -323,7 +430,7 @@ public class DuerController {
 
 	}
 
-	/* Donne la liste des Evrp en fonction du critère_Ex */
+	/* Donne la liste des Evrp en fonction du critère_Mo */
 	@RequestMapping(method = RequestMethod.GET, path = "duercmo")
 	public List<DuerFront> filtrerCriticiteMo(@RequestParam("crit") int crit) {
 
