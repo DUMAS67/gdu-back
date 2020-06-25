@@ -19,22 +19,42 @@ import dev.pch.domains.Ut;
  * @author Thierry Dumas
  *
  */
+
+/*
+ * Classe qui permet de construire un objet DuerVM qui récupère les informations
+ * d'un objet Duer. Cette recopie assure une sécurité dans le cas d'objet avec
+ * clef étrangères qui renseignent d'autres objets succeptibles de changer
+ */
 public class DuerVM {
 
 	private int id;
+	// récupère l'identifiant de la table DUER
 	private Ut ut;
+	// récupère l'objet ut du Duer
 	private Lieu lieu;
+	// récupère l'objet lieu du Duer
 	private Activites activite;
+	// récupère l'objet activite du Duer
 	private Dangers danger;
+	// récupère l'objet danger du Duer
 	private Risques risque;
+	// récupère l'objet risque du Duer
 	private Gravite graviteEx;
+	// récupère l'objet graviteEx du Duer
 	private Frequence frequenceEx;
+	// récupère l'objet frequenceEx du Duer
 	private String prevExistante;
+	// récupère la valeur de prevExistante du Duer
 	private Gravite graviteMo;
+	// récupère l'objet graviteMo du Duer
 	private Frequence frequenceMo;
+	// récupère l'objet frequenceMo du Duer
 	private String prevMiseEnOeuvre;
+	// récupère la valeur de prevMiseEnOeuvre du Duer
 	private PlanActionSpecifique pas;
+	// récupère l'objet pas du Duer
 	private LocalDateTime dateEvrp;
+	// récupère l'objet dateEvrp du Duer
 
 	public DuerVM(Duer duer) {
 		super();

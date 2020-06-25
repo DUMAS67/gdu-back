@@ -20,6 +20,10 @@ import dev.pch.vm.RisquesVM;
  * @author Thierry Dumas
  *
  */
+/*
+ * Classe qui définit les accès à la table RISQUES pour la lecture et l'écriture
+ * de données
+ */
 
 @RestController
 
@@ -32,16 +36,15 @@ public class RisquesControler {
 		this.risquesrepo = risquesrepo;
 	}
 
+	// Crée une liste des tous les risques de la Table RISQUES
 	@RequestMapping(method = RequestMethod.GET, path = "risques")
 	public List<RisquesVM> listerRisques() {
 		List<Risques> listeRisques = this.risquesrepo.findAll();
-		/*
-		 * for (Risques r : listeRisques) { System.out.println(r.getNom()); }
-		 */
 
 		return listeRisques.stream().map(r -> new RisquesVM(r)).collect(Collectors.toList());
 	}
 
+	/* Trouve un enregistrement de la table RISQUES par son identifiant : id */
 	@RequestMapping(method = RequestMethod.GET, path = "risque")
 	public Optional<Risques> trouverRisque(@RequestParam("id") int id) {
 		Optional<Risques> risque = this.risquesrepo.findById(id);

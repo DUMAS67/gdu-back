@@ -17,6 +17,8 @@ import javax.validation.constraints.NotNull;
  * @author Thierry Dumas
  *
  */
+
+/* Définition de la Table PLAN_ACTIONS_SPECIFIQUE */
 @Entity
 public class PlanActionSpecifique {
 

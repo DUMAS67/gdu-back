@@ -12,6 +12,9 @@ import javax.persistence.Id;
  * @author Thierry Dumas
  *
  */
+
+/* Définition de la Table ACTIVITES */
+
 @Entity
 public class Activites {
 

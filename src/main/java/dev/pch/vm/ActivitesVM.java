@@ -9,10 +9,19 @@ import dev.pch.domains.Activites;
  * @author Thierry Dumas
  *
  */
+
+/*
+ * Classe qui permet de construire un objet ActivitesVM qui récupère les
+ * informations d'un objet Activites Cette recopie assure une sécurité dans le
+ * cas d'objet avec clef étrangères qui renseignent d'autres objets succeptibles
+ * de changer
+ */
 public class ActivitesVM {
 
 	private int id;
+	// identifiant récupéré de la table ACTIVITES
 	private String nom;
+	// Valeur récupérée de la table ACTIVITES
 
 	public ActivitesVM(Activites a) {
 		super();

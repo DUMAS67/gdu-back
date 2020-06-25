@@ -10,6 +10,9 @@ import javax.persistence.Id;
  * @author Thierry Dumas
  *
  */
+
+/* Définition de la Table GRAVITE */
+
 @Entity
 public class Gravite {
 
@@ -18,6 +21,7 @@ public class Gravite {
 	/** id unique de la table de valeur de Gravité */
 	private Integer valeur;
 
+	// valeur de gravite
 	public Gravite() {
 	}
 

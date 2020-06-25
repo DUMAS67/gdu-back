@@ -7,13 +7,18 @@ package dev.pch.domains;
  * @author Thierry Dumas
  *
  */
+
+/*
+ * Définition d'une Classe décrivant un Objet Duer par le renseignement de clef
+ * étrangère
+ */
 public class DuerClef {
 
 	public Integer id_ut;
 	/** renseigne l'Unité de Lieu */
 
 	public Integer id_lieu;
-	/** renseigne sur le lieu ùu se trouve le risque */
+	/** renseigne sur le lieu où se trouve le risque */
 
 	public Integer id_activite;
 	/** renseigne sur l'activité */

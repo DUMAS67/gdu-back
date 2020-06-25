@@ -9,6 +9,11 @@ import java.time.LocalDateTime;
  * @author Thierry Dumas
  *
  */
+
+/*
+ * Classe décrivant une Action spécifique présentable pour l'utilisateur dans la
+ * partie Front
+ */
 public class PlanActionSpecifiqueFront {
 
 	private Integer id;

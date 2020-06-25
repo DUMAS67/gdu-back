@@ -9,11 +9,20 @@ import dev.pch.domains.Dangers;
  * @author Thierry Dumas
  *
  */
+
+/*
+ * Classe qui permet de construire un objet DangerVM qui récupère les
+ * informations d'un objet Danger. Cette recopie assure une sécurité dans le cas
+ * d'objet avec clef étrangères qui renseignent d'autres objets succeptibles de
+ * changer
+ */
 public class DangersVM {
 
 	private int id;
+	// récupère l'identifiant de la table DANGERS
 	private String nom;
 
+	// récupère la valeur de l'enregistrement de la table DANGERS
 	public DangersVM(Dangers dg) {
 		super();
 		this.id = dg.getId();

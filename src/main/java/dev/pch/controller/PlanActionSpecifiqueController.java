@@ -34,6 +34,11 @@ import dev.pch.vm.RisquesVM;
  *
  */
 
+/*
+ * Classe qui définit les accès à la table PLAN_ACTION_SPECIFIQUE pour la
+ * lecture et l'écriture de données
+ */
+
 @RestController
 
 public class PlanActionSpecifiqueController {
@@ -49,7 +54,7 @@ public class PlanActionSpecifiqueController {
 
 	private static final Logger LOG = LoggerFactory.getLogger(dev.pch.controller.PlanActionSpecifiqueController.class);
 
-	/* liste tous les plans d'action spécifique */
+	/* Crée une liste contenant toutes les actions spécifiques */
 	@RequestMapping(method = RequestMethod.GET, path = "pass")
 	public List<PlanActionSpecifiqueVM> listerPlanActionSpecifique() {
 		List<PlanActionSpecifique> listePlanActionSpecifique = this.planActionSpecifiqueRepo.findAll();
@@ -57,7 +62,7 @@ public class PlanActionSpecifiqueController {
 		return listePlanActionSpecifique.stream().map(r -> new PlanActionSpecifiqueVM(r)).collect(Collectors.toList());
 	}
 
-	/* liste tous les plans d'action spécifique format PAS FRontVM */
+	/* liste tous les actions spécifiques format PAS FRontVM */
 	@RequestMapping(method = RequestMethod.GET, path = "passf")
 	public List<PlanActionSpecifiqueFrontVM> listerPlanActionSpecifiqueFront() {
 		List<PlanActionSpecifique> listePlanActionSpecifique = this.planActionSpecifiqueRepo.findAll();
@@ -66,7 +71,7 @@ public class PlanActionSpecifiqueController {
 				.collect(Collectors.toList());
 	}
 
-	/* Construire la liste des Pas de Dangers = ? */
+	/* Construie la liste des Pas filtrée par le critère de Danger : id */
 	@RequestMapping(method = RequestMethod.GET, path = "passfdg")
 	public List<PlanActionSpecifiqueFrontVM> listerPasByDanger(@RequestParam("id") Integer id) {
 		List<PlanActionSpecifique> listePlanActionSpecifique = this.planActionSpecifiqueRepo.findAll();
@@ -75,7 +80,7 @@ public class PlanActionSpecifiqueController {
 				.map(r -> new PlanActionSpecifiqueFrontVM(r)).collect(Collectors.toList());
 	}
 
-	/* Construire la liste des Pas de risque = ? */
+	/* Construie la liste des Pas filtrée par le critère de Risque : id */
 	@RequestMapping(method = RequestMethod.GET, path = "passfrq")
 	public List<PlanActionSpecifiqueFrontVM> listerPasByRisque(@RequestParam("id") Integer id) {
 		List<PlanActionSpecifique> listePlanActionSpecifique = this.planActionSpecifiqueRepo.findAll();
@@ -84,7 +89,7 @@ public class PlanActionSpecifiqueController {
 				.map(r -> new PlanActionSpecifiqueFrontVM(r)).collect(Collectors.toList());
 	}
 
-	/* Construire la liste des Pas de qui = ? */
+	/* Construie la liste des Pas filtrée par le critère Qui?: id */
 	@RequestMapping(method = RequestMethod.GET, path = "passfqui")
 	public List<PlanActionSpecifiqueFrontVM> listerPasByQui(@RequestParam("nom") String nom) {
 		List<PlanActionSpecifique> listePlanActionSpecifique = this.planActionSpecifiqueRepo.findAll();
@@ -93,14 +98,14 @@ public class PlanActionSpecifiqueController {
 				.map(r -> new PlanActionSpecifiqueFrontVM(r)).collect(Collectors.toList());
 	}
 
-	/* trouve un plan d'action spécifique en fonction de son id */
+	/* trouve une action spécifique en fonction de son identifiant : id */
 	@RequestMapping(method = RequestMethod.GET, path = "pas")
 	public Optional<PlanActionSpecifique> trouverPasById(@RequestParam("id") Integer id) {
 		Optional<PlanActionSpecifique> pas = this.planActionSpecifiqueRepo.findById(id);
 		return pas;
 	}
 
-	/* Création d'un Plan d'Action Spécifique */
+	/* Création d'une Action Spécifique */
 	@Transactional
 	@RequestMapping(method = RequestMethod.POST, path = "pasc")
 	public ResponseEntity<String> creerPas(@RequestBody PlanActionSpecifiqueFront newPas) {
@@ -127,7 +132,7 @@ public class PlanActionSpecifiqueController {
 		}
 	}
 
-	/* trouver les Dangers existants dans la liste des Pas */
+	/* Trouve les Dangers existants dans la liste des Actions spécifiques */
 	@RequestMapping(method = RequestMethod.GET, path = "pasldg")
 	public List<DangersVM> trouverDangerdansPas() {
 
@@ -136,7 +141,7 @@ public class PlanActionSpecifiqueController {
 
 	}
 
-	/* trouver les Risques existants dans la liste des Pas */
+	/* Trouve les Risques existants dans la liste des Actions spécifiques */
 	@RequestMapping(method = RequestMethod.GET, path = "paslrq")
 	public List<RisquesVM> trouverRisquesdansPas() {
 
@@ -145,7 +150,7 @@ public class PlanActionSpecifiqueController {
 
 	}
 
-	/* trouver les qui existants dans la liste des Pas */
+	/* Trouve les qui existants dans la liste des Actions spécifiques */
 	@RequestMapping(method = RequestMethod.GET, path = "paslqui")
 	public List<String> trouverQuidansPas() {
 
@@ -154,10 +159,14 @@ public class PlanActionSpecifiqueController {
 
 	}
 
+	/*
+	 * Modifie une Action Spécifique par un nouvel objet d'Action Spécifique :
+	 * newPas
+	 */
 	@Transactional
 	@RequestMapping(method = RequestMethod.POST, path = "pascm")
 	public ResponseEntity<String> modifierPas(@RequestBody PlanActionSpecifiqueFront newPas) {
-
+		// On vérifie si l'Action Spécifique existe
 		Optional<Duer> existDuer = this.duerRepo.findById(newPas.getIdDuer());
 		if ((newPas.getId() != null) && (existDuer.isPresent())) {
 			LOG.info(" Début Modification du Plan d'action spécifique : ");
@@ -180,11 +189,15 @@ public class PlanActionSpecifiqueController {
 		}
 	}
 
-	/* Détruit un Pas */
+	/*
+	 * Détruit une Action Spécifique du Pas par son identifiant : id et par la
+	 * destruction de la ckef étrangère : iduer
+	 */
+
 	@Transactional
 	@RequestMapping(method = RequestMethod.POST, path = "pasdet")
 	public ResponseEntity<String> detruirePas(@RequestParam("id") Integer id, @RequestParam("iduer") Integer iduer) {
-		// On vérifie si l'Id du Pas que l'on veut detruirre existe
+		// On vérifie si l'Id du Pas que l'on veut detruire existe
 		Optional<PlanActionSpecifique> idEx = this.planActionSpecifiqueRepo.findById(id);
 		Optional<Duer> duerExist = this.duerRepo.findById(iduer);
 		if (idEx.isPresent() && duerExist.isPresent()) {

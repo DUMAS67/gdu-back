@@ -15,6 +15,8 @@ import dev.pch.domains.Ut;
  * @author Thierry Dumas
  *
  */
+
+/* Définition des requêtes utilisées dans le contrôleur de Duer */
 public interface DuerRepo extends JpaRepository<Duer, Integer> {
 
 	@Override

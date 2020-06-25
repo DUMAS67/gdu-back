@@ -20,6 +20,8 @@ import javax.validation.constraints.NotNull;
  *
  */
 
+/* Définition de la Table COLLABORATEUR */
+
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Collaborateur {

@@ -18,7 +18,10 @@ import dev.pch.vm.FrequenceVM;
 
 /**
  * @author Thierry Dumas
- *
+ */
+/*
+ * Classe qui définit les accès à la table FREQUENCE pour la lecture et
+ * l'écriture de données
  */
 
 @RestController
@@ -31,6 +34,7 @@ public class FrequenceController {
 		this.frequenceRepo = frequenceRepo;
 	}
 
+	// Crér une liste de toutes les fréquences de la table FREQUENCE
 	@RequestMapping(method = RequestMethod.GET, path = "frequences")
 	public List<FrequenceVM> listerFrequence() {
 		List<Frequence> listeFrequence = this.frequenceRepo.findAll();
@@ -38,6 +42,7 @@ public class FrequenceController {
 		return listeFrequence.stream().map(r -> new FrequenceVM(r)).collect(Collectors.toList());
 	}
 
+	/* Trouve un enregistrement de la table FREQUENCE par un identifiant : id */
 	@RequestMapping(method = RequestMethod.GET, path = "frequence")
 	public Optional<Frequence> trouverFrequence(@RequestParam("id") int id) {
 		Optional<Frequence> frequence = this.frequenceRepo.findById(id);

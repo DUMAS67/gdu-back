@@ -10,6 +10,9 @@ import javax.persistence.Id;
  * @author Thierry Dumas
  *
  */
+
+/* Définition de la Table FREQUENCE */
+
 @Entity
 public class Frequence {
 
@@ -18,7 +21,7 @@ public class Frequence {
 	/** Identifiant unique */
 	private Integer valeur;
 
-	/** Premère valeur = valeur de Fréquence */
+	/** valeur de Fréquence */
 
 	public Frequence() {
 	}

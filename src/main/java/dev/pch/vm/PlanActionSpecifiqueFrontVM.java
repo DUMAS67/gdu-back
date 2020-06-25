@@ -11,17 +11,33 @@ import dev.pch.domains.PlanActionSpecifique;
  * @author Thierry Dumas
  *
  */
+
+/*
+ * Classe qui permet de construire un objet PlanActionSpecifiqueFrontVM qui
+ * récupère les informations d'un objet PlanActionSpecifiqueFront. Cette recopie
+ * assure une sécurité dans le cas d'objet avec clef étrangères qui renseignent
+ * d'autres objets succeptibles de changer
+ */
 public class PlanActionSpecifiqueFrontVM {
 
 	private Integer id;
+	// récupère l'identifiant de la table PLAN_ACTION_SPECIFIQUE
 	private Integer idDuer;
+	// récupère l'identifiant de la table DUER
 	private String danger;
+	// récupère la valeur danger du PlanActionSpecifique
 	private String risque;
+	// récupère la valeur risque du PlanActionSpecifique
 	private String action;
+	// récupère la valeur action du PlanActionSpecifique
 	private float budget;
+	// récupère la valeur budget du PlanActionSpecifique
 	private String qui;
+	// récupère la valeur qui du PlanActionSpecifique
 	private LocalDateTime delai;
+	// récupère la valeur deai du PlanActionSpecifique
 	private boolean etat;
+	// récupère la valeur etat du PlanActionSpecifique
 
 	public PlanActionSpecifiqueFrontVM() {
 	}

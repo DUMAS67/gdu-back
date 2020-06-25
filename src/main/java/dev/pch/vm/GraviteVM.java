@@ -9,10 +9,20 @@ import dev.pch.domains.Gravite;
  * @author Thierry Dumas
  *
  */
+
+/*
+ * Classe qui permet de construire un objet GraviteVM qui récupère les
+ * informations d'un objet Gravite. Cette recopie assure une sécurité dans le
+ * cas d'objet avec clef étrangères qui renseignent d'autres objets succeptibles
+ * de changer
+ */
+
 public class GraviteVM {
 
 	private int id;
+	// identifiant de l'enregistrement de la table GRAVITE
 	private int valeur;
+	// récupère la valeur de l'enregistrement
 
 	public GraviteVM(Gravite g) {
 		super();

@@ -18,6 +18,7 @@ import javax.validation.constraints.NotNull;
  * @author Thierry Dumas
  *
  */
+/* Définition de la Table DUER enregistrement d'Evrp */
 
 @Entity
 public class Duer {
@@ -122,12 +123,15 @@ public class Duer {
 		this.dateEvrp = dateEvrp;
 	}
 
+	// Constructeur qui rajoute l'information de la clef étrangère du pas
+	// (Action Spécifique)
 	public Duer(Integer id, PlanActionSpecifique pas) {
 		super();
 		this.id = id;
 		this.pas = pas;
 	}
 
+	// Constructeur sans le renseignement de l'action spécifique
 	public Duer(@NotNull Ut ut, @NotNull Lieu lieu, @NotNull Activites activite, @NotNull Dangers danger,
 			@NotNull Risques risque, @NotNull Gravite gravite_Ex, @NotNull Frequence frequence_Ex,
 			@NotNull String prevExistante, @NotNull Gravite gravite_Mo, @NotNull Frequence frequence_Mo,

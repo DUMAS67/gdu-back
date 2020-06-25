@@ -9,6 +9,11 @@ import java.time.LocalDateTime;
  * @author Thierry Dumas
  *
  */
+
+/*
+ * Classe décrivant un Duer par les nom des entités qui le renseignent Utilisé
+ * pour l'affichage dans le module Front
+ */
 public class DuerFront {
 
 	private Integer id;

@@ -22,7 +22,10 @@ import dev.pch.vm.DangersVM;
 
 /**
  * @author Thierry Dumas
- *
+ */
+/*
+ * Classe qui définit les accès à la table DANGERS pour la lecture et l'écriture
+ * de données
  */
 
 @RestController
@@ -37,6 +40,7 @@ public class DangersController {
 		this.dangersRepo = dangersRepo;
 	}
 
+	/* Crée une liste de tous les Dangers de la Base de données gdu-db */
 	@RequestMapping(method = RequestMethod.GET, path = "dangers")
 	public List<DangersVM> listerDangers() {
 		List<Dangers> listeDangers = this.dangersRepo.findAll();
@@ -44,6 +48,10 @@ public class DangersController {
 		return listeDangers.stream().map(r -> new DangersVM(r)).collect(Collectors.toList());
 	}
 
+	/*
+	 * Récupère les informations d'un danger de la table DANGERS par son
+	 * identifiant : id
+	 */
 	@RequestMapping(method = RequestMethod.GET, path = "danger")
 	public Optional<Dangers> trouverDangers(@RequestParam("id") int id) {
 		Optional<Dangers> danger = this.dangersRepo.findById(id);
@@ -51,6 +59,7 @@ public class DangersController {
 		return danger;
 	}
 
+	/* Crée un nouveau danger dans la table DANGERS */
 	@RequestMapping(method = RequestMethod.POST, path = "danger")
 	public ResponseEntity<String> creerDanger(@RequestParam("nom") String nom) {
 		LOG.info(" Creer le danger de nom : " + nom);
@@ -78,6 +87,10 @@ public class DangersController {
 
 	}
 
+	/*
+	 * Modifie un danger de la table DANGER, sélectionné par son identifiant :
+	 * idav de nouvau nom : nomap
+	 */
 	@RequestMapping(method = RequestMethod.POST, path = "dangerm")
 	public ResponseEntity<String> modifierDanger(@RequestParam("id") Integer idav,
 			@RequestParam("nomap") String nomap) {

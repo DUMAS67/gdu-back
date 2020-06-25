@@ -12,6 +12,11 @@ import javax.persistence.Id;
  * @author Thierry Dumas
  *
  */
+
+/*
+ * Définition de la Table RISQUES
+ *
+ */
 @Entity
 public class Risques {
 

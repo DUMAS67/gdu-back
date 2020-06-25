@@ -13,6 +13,8 @@ import javax.persistence.Id;
  *
  */
 
+/* Définition de la Table UT */
+
 @Entity
 public class Ut {
 	@Id

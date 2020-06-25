@@ -9,10 +9,19 @@ import dev.pch.domains.Risques;
  * @author Thierry Dumas
  *
  */
+
+/*
+ * Classe qui permet de construire un objet RisqueVM qui récupère les
+ * informations d'un objet Risque. Cette recopie assure une sécurité dans le cas
+ * d'objet avec clef étrangères qui renseignent d'autres objets succeptibles de
+ * changer
+ */
 public class RisquesVM {
 
 	private int id;
+	// récupère l'identifiant de l'enregistrement de la table RISQUES
 	private String nom;
+	// récupère la valeur nom
 
 	public RisquesVM(Risques ris) {
 		super();

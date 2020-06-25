@@ -9,9 +9,17 @@ import dev.pch.domains.Frequence;
  * @author Thierry Dumas
  *
  */
+/*
+ * Classe qui permet de construire un objet FrequenceVM qui récupère les
+ * informations d'un objet Frequence. Cette recopie assure une sécurité dans le
+ * cas d'objet avec clef étrangères qui renseignent d'autres objets succeptibles
+ * de changer
+ */
 public class FrequenceVM {
 	private int id;
+	// identifiant d'un enregistrement de la table FREQUENCE
 	private int valeur;
+	// récupère la valeur de l'enregistrement
 
 	public FrequenceVM(Frequence f) {
 		super();
