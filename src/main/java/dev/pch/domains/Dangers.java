@@ -1,14 +1,18 @@
 package dev.pch.domains;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+/* Définition de la Table DANGERS */
 
 @Entity
 public class Dangers {
 
 	@Id
-	// @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
 	/** Id de la liste des dangers */
 
 	private String nom;
@@ -23,7 +27,7 @@ public class Dangers {
 		this.nom = nom;
 	}
 
-	public Dangers(int id, String nom) {
+	public Dangers(Integer id, String nom) {
 		super();
 		this.id = id;
 		this.nom = nom;
@@ -32,7 +36,7 @@ public class Dangers {
 	/**
 	 * @return the id
 	 */
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 

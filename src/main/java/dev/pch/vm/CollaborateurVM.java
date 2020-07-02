@@ -20,13 +20,25 @@ import dev.pch.domains.RoleCollaborateur;
  * Structure modèlisant un collaborateur servant à communiquer avec l'extérieur
  * (WEB API).
  */
+/*
+ * Classe qui permet de construire un objet CollaborateurVM qui récupère les
+ * informations d'un objet Collaborateur Cette recopie assure une sécurité dans
+ * le cas d'objet avec clef étrangères qui renseignent d'autres objets
+ * succeptibles de changer
+ */
 public class CollaborateurVM {
 	private Long id;
+	// id récupéré de la table COLLABORATEUR
 	private String email;
+	// email récupéré de la table COLLABORATEUR
 	private String nom;
+	// valeur de nom récupérée de la table COLLABORATEUR
 	private String prenom;
+	// valeur du prenom récupéré de la table COLLABORATEUR
 	private String numeroTel;
+	// valeur du numero de téléphone récupéré de la table COLLABORATEUR
 	private List<Role> roles = new ArrayList<>();
+	// Tableau de valeurs de Roles récupéré de la table COLLABORATEUR
 
 	public CollaborateurVM() {
 	}

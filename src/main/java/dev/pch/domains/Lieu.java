@@ -13,12 +13,14 @@ import javax.persistence.Id;
  *
  */
 
+/* Définition de la Table Lieu */
+
 @Entity
 public class Lieu {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Integer id;
 	/** id de la liste de lieu */
 	private String nom;
 
@@ -32,7 +34,7 @@ public class Lieu {
 		this.nom = nom;
 	}
 
-	public Lieu(int id, String nom) {
+	public Lieu(Integer id, String nom) {
 		super();
 		this.id = id;
 		this.nom = nom;
@@ -41,7 +43,7 @@ public class Lieu {
 	/**
 	 * @return the id
 	 */
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 

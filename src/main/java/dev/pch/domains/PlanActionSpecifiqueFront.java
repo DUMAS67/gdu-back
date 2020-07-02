@@ -5,48 +5,29 @@ package dev.pch.domains;
 
 import java.time.LocalDateTime;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.validation.constraints.NotNull;
-
 /**
  * @author Thierry Dumas
  *
  */
 
-/* Définition de la Table PLAN_ACTIONS_SPECIFIQUE */
-@Entity
-public class PlanActionSpecifique {
+/*
+ * Classe décrivant une Action spécifique présentable pour l'utilisateur dans la
+ * partie Front
+ */
+public class PlanActionSpecifiqueFront {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	/** id du Plan d'Actions Spécifique */
-	@NotNull
-	@OneToOne
-	@JoinColumn(name = "duer_id")
-	private Duer idDuer;
-	/** id de la ligne d'EvRp du Duer où se fait le Plan d'Action Spécifique */
+	private Integer idDuer;
 	private String action;
-	/** Détails action à mettre en place */
 	private float budget;
-	/** Budget prévisionnel de l'action spécifique */
 	private String qui;
-	/** Décrit la personne responsable de l'action */
 	private LocalDateTime delai;
-	/** Donne le délai de mise en place de l'Action */
 	private boolean etat;
 
-	/** indique si l'action a été entreprise */
-
-	public PlanActionSpecifique() {
+	public PlanActionSpecifiqueFront() {
 	}
 
-	public PlanActionSpecifique(Integer id, @NotNull Duer idDuer, String action, float budget, String qui,
+	public PlanActionSpecifiqueFront(Integer id, Integer idDuer, String action, float budget, String qui,
 			LocalDateTime delai, boolean etat) {
 		super();
 		this.id = id;
@@ -76,7 +57,7 @@ public class PlanActionSpecifique {
 	/**
 	 * @return the idDuer
 	 */
-	public Duer getIdDuer() {
+	public Integer getIdDuer() {
 		return idDuer;
 	}
 
@@ -84,7 +65,7 @@ public class PlanActionSpecifique {
 	 * @param idDuer
 	 *            the idDuer to set
 	 */
-	public void setIdDuer(Duer idDuer) {
+	public void setIdDuer(Integer idDuer) {
 		this.idDuer = idDuer;
 	}
 

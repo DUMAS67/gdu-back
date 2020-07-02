@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+/* Classe qui démarre en Spring Boot l'application GDU */
 @SpringBootApplication
 public class GduPchBackApplication {
 

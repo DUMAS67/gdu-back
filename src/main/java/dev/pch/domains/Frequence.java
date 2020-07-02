@@ -10,20 +10,23 @@ import javax.persistence.Id;
  * @author Thierry Dumas
  *
  */
+
+/* Définition de la Table FREQUENCE */
+
 @Entity
 public class Frequence {
 
 	@Id
-	private int id;
+	private Integer id;
 	/** Identifiant unique */
-	private int valeur;
+	private Integer valeur;
 
-	/** Premère valeur = valeur de Fréquence */
+	/** valeur de Fréquence */
 
 	public Frequence() {
 	}
 
-	public Frequence(int id, int valeur) {
+	public Frequence(Integer id, Integer valeur) {
 		super();
 		this.id = id;
 		this.valeur = valeur;
@@ -33,7 +36,7 @@ public class Frequence {
 	/**
 	 * @return the id
 	 */
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
@@ -41,7 +44,7 @@ public class Frequence {
 	 * @param id
 	 *            the id to set
 	 */
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -56,7 +59,7 @@ public class Frequence {
 	 * @param valeur1
 	 *            the valeur1 to set
 	 */
-	public void setValeur(int valeur) {
+	public void setValeur(Integer valeur) {
 		this.valeur = valeur;
 	}
 

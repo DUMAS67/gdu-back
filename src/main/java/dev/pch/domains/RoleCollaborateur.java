@@ -8,6 +8,8 @@ package dev.pch.domains;
  *
  */
 
+/* Définition de la Table  ROLE_COLLABORATUER */
+
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;

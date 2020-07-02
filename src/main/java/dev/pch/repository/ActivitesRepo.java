@@ -13,6 +13,8 @@ import dev.pch.domains.Activites;
  * @author Thierry Dumas
  *
  */
+
+/* Définition des requêtes utilisées dans le contrôleur d'activités */
 public interface ActivitesRepo extends JpaRepository<Activites, Integer> {
 
 	Optional<Activites> findByNom(String nom);

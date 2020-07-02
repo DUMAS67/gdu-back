@@ -10,18 +10,22 @@ import javax.persistence.Id;
  * @author Thierry Dumas
  *
  */
+
+/* Définition de la Table GRAVITE */
+
 @Entity
 public class Gravite {
 
 	@Id
-	private int id;
+	private Integer id;
 	/** id unique de la table de valeur de Gravité */
-	private int valeur;
+	private Integer valeur;
 
+	// valeur de gravite
 	public Gravite() {
 	}
 
-	public Gravite(int id, int valeur) {
+	public Gravite(Integer id, Integer valeur) {
 		super();
 		this.id = id;
 		this.valeur = valeur;
@@ -30,7 +34,7 @@ public class Gravite {
 	/**
 	 * @return the id
 	 */
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
@@ -38,14 +42,14 @@ public class Gravite {
 	 * @param id
 	 *            the id to set
 	 */
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
 	/**
 	 * @return the valeur
 	 */
-	public int getValeur() {
+	public Integer getValeur() {
 		return valeur;
 	}
 
@@ -53,7 +57,7 @@ public class Gravite {
 	 * @param valeur
 	 *            the valeur to set
 	 */
-	public void setValeur(int valeur) {
+	public void setValeur(Integer valeur) {
 		this.valeur = valeur;
 	}
 

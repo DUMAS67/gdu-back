@@ -12,12 +12,15 @@ import javax.persistence.Id;
  * @author Thierry Dumas
  *
  */
+
+/* Définition de la Table ACTIVITES */
+
 @Entity
 public class Activites {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Integer id;
 
 	/** Identifiant de l'activité */
 	private String nom;
@@ -32,7 +35,7 @@ public class Activites {
 		this.nom = nom;
 	}
 
-	public Activites(int id, String nom) {
+	public Activites(Integer id, String nom) {
 		super();
 		this.id = id;
 		this.nom = nom;
@@ -41,7 +44,7 @@ public class Activites {
 	/**
 	 * @return the id
 	 */
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 

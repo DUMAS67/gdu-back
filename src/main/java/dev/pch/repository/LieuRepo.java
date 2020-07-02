@@ -13,6 +13,9 @@ import dev.pch.domains.Lieu;
  * @author Thierry Dumas
  *
  */
+
+/* Définition des requêtes utilisées dans le contrôleur de Lieu */
+
 public interface LieuRepo extends JpaRepository<Lieu, Integer> {
 
 	Optional<Lieu> findByNom(String nom);

@@ -24,6 +24,10 @@ import dev.pch.vm.UtVM;
  * @author Thierry Dumas
  *
  */
+/*
+ * Classe qui définit les accès à la table UT pour la lecture et l'écriture de
+ * données
+ */
 
 @RestController
 
@@ -38,6 +42,7 @@ public class UtController {
 		this.utRepo = utRepo;
 	}
 
+	// Crée une liste de tous les enregistrements de la Table UT
 	@RequestMapping(method = RequestMethod.GET, path = "uts")
 	public List<UtVM> listerUt() {
 		List<Ut> listeUt = this.utRepo.findAll();
@@ -45,31 +50,52 @@ public class UtController {
 		return listeUt.stream().map(r -> new UtVM(r)).collect(Collectors.toList());
 	}
 
+	/* Trouve un enregistrement de la table UT par son identifiant : id */
+
+	@RequestMapping(method = RequestMethod.GET, path = "ut")
+	public Optional<Ut> trouverUt(@RequestParam("id") int id) {
+		Optional<Ut> ut = this.utRepo.findById(id);
+		LOG.info(">>>> consulter l'Ut d'id : " + id);
+		LOG.info("-> " + ut.isPresent());
+		return ut;
+	}
+	/*
+	 * Crée unenregistrement dans la table UT avec comme information son nom :
+	 * nom
+	 */
+
 	@RequestMapping(method = RequestMethod.POST, path = "ut")
 	public ResponseEntity<String> creerUt(@RequestParam("nom") String nom) {
-		LOG.info(" Creer l'UT de nom : " + nom);
+		LOG.info(" Creer l UT de nom : " + nom);
 
 		// On vérifie si l'Ut existe
 		Optional<Ut> utNew = this.utRepo.findByNom(nom);
 		if (utNew.isPresent() && (nom != null) && (nom != "")) {
 			String messageErreur = "";
-			messageErreur = "Ut de nom : " + nom + " introuvable..";
+			messageErreur = "Ut de nom : " + nom + " existe déjà et/ou libellé incohérent";
 			LOG.error(messageErreur);
 			// throw new ElementNotFoundException(messageErreur);
 			return ResponseEntity.status(HttpStatus.CONFLICT).body(messageErreur);
 		} else {
-			LOG.info(">>>> Creer l'Ut de nom : " + nom);
-			// Creer l'UT
-			Ut nouvelleUt = new Ut(nom);
+			if (!utNew.isPresent() && (nom != null) && (nom != "")) {
+				LOG.info(">>>> Creer l Ut de nom : " + nom);
+				// Creer l'UT
+				Ut nouvelleUt = new Ut(nom);
 
-			this.utRepo.save(nouvelleUt);
-			return ResponseEntity.status(HttpStatus.OK).body("L'Ut a été créé avec succès!");
+				this.utRepo.save(nouvelleUt);
+				return ResponseEntity.status(HttpStatus.OK).body("L Ut a été créé avec succès!");
+			} else {
+				return ResponseEntity.status(HttpStatus.CONFLICT).body("Les données de l Ut ne sont pas cohérentes");
+			}
 		}
-
 	}
 
+	/*
+	 * Modifie un enregistrement de la table UT sélectionné par son identifiant
+	 * : idav et pour nouveau nom : nomap
+	 */
 	@RequestMapping(method = RequestMethod.POST, path = "utm")
-	public ResponseEntity<String> creerUt(@RequestParam("id") Integer idav, @RequestParam("nomap") String nomap) {
+	public ResponseEntity<String> modifierUt(@RequestParam("id") Integer idav, @RequestParam("nomap") String nomap) {
 		LOG.info(" Modifier l'UT d'id: " + idav);
 
 		// On vérifie si l'Ut existe

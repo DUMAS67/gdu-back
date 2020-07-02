@@ -3,7 +3,7 @@
  */
 package dev.pch.vm;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import dev.pch.domains.Duer;
 import dev.pch.domains.PlanActionSpecifique;
@@ -12,15 +12,31 @@ import dev.pch.domains.PlanActionSpecifique;
  * @author Thierry Dumas
  *
  */
+
+/*
+ * Classe qui permet de construire un objet PlanActionSpecifiqueVM qui récupère
+ * les informations d'un objet PlanActionSpecifiqueFront. Cette recopie assure
+ * une sécurité dans le cas d'objet avec clef étrangères qui renseignent
+ * d'autres objets succeptibles de changer
+ */
+
 public class PlanActionSpecifiqueVM {
 
-	private int id;
+	private Integer id;
+	// récupère l'identifiant de l'enregistrement de la table
+	// PLAN_ACTION_SPECIFIQUE
 	private Duer idDuer;
+	// récupère l'identifiant de l'enregistrement de la table DUER
 	private String action;
+	// récupère la valeur de l'action
 	private float budget;
+	// récupère la valeur du budget
 	private String qui;
-	private Date delai;
+	// récupère la valeur de qui ?
+	private LocalDateTime delai;
+	// récupère la valeur de delai
 	private boolean etat;
+	// récupère la valeur etat
 
 	public PlanActionSpecifiqueVM(PlanActionSpecifique pas) {
 		super();
@@ -111,7 +127,7 @@ public class PlanActionSpecifiqueVM {
 	/**
 	 * @return the delai
 	 */
-	public Date getDelai() {
+	public LocalDateTime getDelai() {
 		return delai;
 	}
 
@@ -119,7 +135,7 @@ public class PlanActionSpecifiqueVM {
 	 * @param delai
 	 *            the delai to set
 	 */
-	public void setDelai(Date delai) {
+	public void setDelai(LocalDateTime delai) {
 		this.delai = delai;
 	}
 

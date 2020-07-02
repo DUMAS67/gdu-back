@@ -5,107 +5,63 @@ package dev.pch.domains;
 
 import java.time.LocalDateTime;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.validation.constraints.NotNull;
-
 /**
  * @author Thierry Dumas
  *
  */
-/* Définition de la Table DUER enregistrement d'Evrp */
 
-@Entity
-public class Duer {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+/*
+ * Classe décrivant un Duer par les nom des entités qui le renseignent Utilisé
+ * pour l'affichage dans le module Front
+ */
+public class DuerFront {
+
 	private Integer id;
 	/** id de chaque ligne de l'EvRP du DUER */
-	@NotNull
-	@ManyToOne
-	@JoinColumn(name = "ut_id")
-	private Ut ut;
+
+	private String ut;
 	/** renseigne l'Unité de Lieu */
-	@NotNull
-	@ManyToOne
-	@JoinColumn(name = "lieu_id")
-	private Lieu lieu;
+
+	private String lieu;
 	/** renseigne sur le lieu ùu se trouve le risque */
-	@NotNull
-	@ManyToOne
-	@JoinColumn(name = "activite_id")
-	private Activites activite;
+
+	private String activite;
 	/** renseigne sur l'activité */
-	@NotNull
-	@ManyToOne
-	@JoinColumn(name = "danger_id")
-	private Dangers danger;
+
+	private String danger;
 
 	/** décrit le danger à analyser */
-	@NotNull
-	@ManyToOne
-	@JoinColumn(name = "risque_id")
-	private Risques risque;
+
+	private String risque;
 	/** renseigne sur le risque engendré */
 
-	@NotNull
-	@ManyToOne
-	@JoinColumn(name = "graviteEx_id")
-	private Gravite gravite_Ex;
+	private Integer gravite_Ex;
 	/** indique la gravité du risque pour la prévention existante */
-	@NotNull
-	@ManyToOne
-	@JoinColumn(name = "frequenceEx_id")
-	private Frequence frequence_Ex;
+
+	private Integer frequence_Ex;
 	/** indique la fréquence du risque pour la prévention existante */
 
-	@NotNull
-	@JoinColumn(name = "prevExistante_id")
 	private String prevExistante;
 	/** décrit la prévention existante */
-	@NotNull
-	@ManyToOne
-	@JoinColumn(name = "graviteMo_id")
-	private Gravite gravite_Mo;
+
+	private Integer gravite_Mo;
 	/** indique la gravité du risque pour la prévention existante */
-	@NotNull
-	@ManyToOne
-	@JoinColumn(name = "frequenceMo_id")
-	private Frequence frequence_Mo;
+
+	private Integer frequence_Mo;
 	/** indique la fréquence du risque pour la prévention existante */
 
-	@NotNull
-	@JoinColumn(name = "prevOeuvre_id")
 	private String prevMiseEnOeuvre;
 	/** décrit la prévention à mettre en oeuvre */
 
-	@OneToOne
-	@JoinColumn(name = "pas_id")
-	private PlanActionSpecifique pas;
+	private Integer pas;
 
 	/** décrit le plan d'action spécifique */
 
-	@JoinColumn(name = "date_jour")
 	private LocalDateTime dateEvrp;
 
-	public Duer() {
-	}
-
-	/**
-	 * @PostLoad private void postLoad() {
-	 *           this.criticite_Ex.setValeur(this.gravite_Mo.getValeur() *
-	 *           this.frequence_Ex.getValeur()); }
-	 */
-
-	public Duer(Integer id, @NotNull Ut ut, @NotNull Lieu lieu, @NotNull Activites activite, @NotNull Dangers danger,
-			@NotNull Risques risque, @NotNull Gravite gravite_Ex, @NotNull Frequence frequence_Ex,
-			@NotNull String prevExistante, @NotNull Gravite gravite_Mo, @NotNull Frequence frequence_Mo,
-			@NotNull String prevMiseEnOeuvre, PlanActionSpecifique pas, LocalDateTime dateEvrp) {
+	public DuerFront(Integer id, String ut, String lieu, String activite, String danger, String risque,
+			Integer gravite_Ex, Integer frequence_Ex, String prevExistante, Integer gravite_Mo, Integer frequence_Mo,
+			String prevMiseEnOeuvre, Integer pas, LocalDateTime dateEvrp) {
 		super();
 		this.id = id;
 		this.ut = ut;
@@ -120,34 +76,6 @@ public class Duer {
 		this.frequence_Mo = frequence_Mo;
 		this.prevMiseEnOeuvre = prevMiseEnOeuvre;
 		this.pas = pas;
-		this.dateEvrp = dateEvrp;
-	}
-
-	// Constructeur qui rajoute l'information de la clef étrangère du pas
-	// (Action Spécifique)
-	public Duer(Integer id, PlanActionSpecifique pas) {
-		super();
-		this.id = id;
-		this.pas = pas;
-	}
-
-	// Constructeur sans le renseignement de l'action spécifique
-	public Duer(@NotNull Ut ut, @NotNull Lieu lieu, @NotNull Activites activite, @NotNull Dangers danger,
-			@NotNull Risques risque, @NotNull Gravite gravite_Ex, @NotNull Frequence frequence_Ex,
-			@NotNull String prevExistante, @NotNull Gravite gravite_Mo, @NotNull Frequence frequence_Mo,
-			@NotNull String prevMiseEnOeuvre, LocalDateTime dateEvrp) {
-		super();
-		this.ut = ut;
-		this.lieu = lieu;
-		this.activite = activite;
-		this.danger = danger;
-		this.risque = risque;
-		this.gravite_Ex = gravite_Ex;
-		this.frequence_Ex = frequence_Ex;
-		this.prevExistante = prevExistante;
-		this.gravite_Mo = gravite_Mo;
-		this.frequence_Mo = frequence_Mo;
-		this.prevMiseEnOeuvre = prevMiseEnOeuvre;
 		this.dateEvrp = dateEvrp;
 	}
 
@@ -169,7 +97,7 @@ public class Duer {
 	/**
 	 * @return the ut
 	 */
-	public Ut getUt() {
+	public String getUt() {
 		return ut;
 	}
 
@@ -177,14 +105,14 @@ public class Duer {
 	 * @param ut
 	 *            the ut to set
 	 */
-	public void setUt(Ut ut) {
+	public void setUt(String ut) {
 		this.ut = ut;
 	}
 
 	/**
 	 * @return the lieu
 	 */
-	public Lieu getLieu() {
+	public String getLieu() {
 		return lieu;
 	}
 
@@ -192,14 +120,14 @@ public class Duer {
 	 * @param lieu
 	 *            the lieu to set
 	 */
-	public void setLieu(Lieu lieu) {
+	public void setLieu(String lieu) {
 		this.lieu = lieu;
 	}
 
 	/**
 	 * @return the activite
 	 */
-	public Activites getActivite() {
+	public String getActivite() {
 		return activite;
 	}
 
@@ -207,14 +135,14 @@ public class Duer {
 	 * @param activite
 	 *            the activite to set
 	 */
-	public void setActivite(Activites activite) {
+	public void setActivite(String activite) {
 		this.activite = activite;
 	}
 
 	/**
 	 * @return the danger
 	 */
-	public Dangers getDanger() {
+	public String getDanger() {
 		return danger;
 	}
 
@@ -222,14 +150,14 @@ public class Duer {
 	 * @param danger
 	 *            the danger to set
 	 */
-	public void setDanger(Dangers danger) {
+	public void setDanger(String danger) {
 		this.danger = danger;
 	}
 
 	/**
 	 * @return the risque
 	 */
-	public Risques getRisque() {
+	public String getRisque() {
 		return risque;
 	}
 
@@ -237,14 +165,14 @@ public class Duer {
 	 * @param risque
 	 *            the risque to set
 	 */
-	public void setRisque(Risques risque) {
+	public void setRisque(String risque) {
 		this.risque = risque;
 	}
 
 	/**
 	 * @return the gravite_Ex
 	 */
-	public Gravite getGravite_Ex() {
+	public Integer getGravite_Ex() {
 		return gravite_Ex;
 	}
 
@@ -252,14 +180,14 @@ public class Duer {
 	 * @param gravite_Ex
 	 *            the gravite_Ex to set
 	 */
-	public void setGravite_Ex(Gravite gravite_Ex) {
+	public void setGravite_Ex(Integer gravite_Ex) {
 		this.gravite_Ex = gravite_Ex;
 	}
 
 	/**
 	 * @return the frequence_Ex
 	 */
-	public Frequence getFrequence_Ex() {
+	public Integer getFrequence_Ex() {
 		return frequence_Ex;
 	}
 
@@ -267,7 +195,7 @@ public class Duer {
 	 * @param frequence_Ex
 	 *            the frequence_Ex to set
 	 */
-	public void setFrequence_Ex(Frequence frequence_Ex) {
+	public void setFrequence_Ex(Integer frequence_Ex) {
 		this.frequence_Ex = frequence_Ex;
 	}
 
@@ -289,7 +217,7 @@ public class Duer {
 	/**
 	 * @return the gravite_Mo
 	 */
-	public Gravite getGravite_Mo() {
+	public Integer getGravite_Mo() {
 		return gravite_Mo;
 	}
 
@@ -297,14 +225,14 @@ public class Duer {
 	 * @param gravite_Mo
 	 *            the gravite_Mo to set
 	 */
-	public void setGravite_Mo(Gravite gravite_Mo) {
+	public void setGravite_Mo(Integer gravite_Mo) {
 		this.gravite_Mo = gravite_Mo;
 	}
 
 	/**
 	 * @return the frequence_Mo
 	 */
-	public Frequence getFrequence_Mo() {
+	public Integer getFrequence_Mo() {
 		return frequence_Mo;
 	}
 
@@ -312,7 +240,7 @@ public class Duer {
 	 * @param frequence_Mo
 	 *            the frequence_Mo to set
 	 */
-	public void setFrequence_Mo(Frequence frequence_Mo) {
+	public void setFrequence_Mo(Integer frequence_Mo) {
 		this.frequence_Mo = frequence_Mo;
 	}
 
@@ -334,7 +262,7 @@ public class Duer {
 	/**
 	 * @return the pas
 	 */
-	public PlanActionSpecifique getPas() {
+	public Integer getPas() {
 		return pas;
 	}
 
@@ -342,7 +270,7 @@ public class Duer {
 	 * @param pas
 	 *            the pas to set
 	 */
-	public void setPas(PlanActionSpecifique pas) {
+	public void setPas(Integer pas) {
 		this.pas = pas;
 	}
 

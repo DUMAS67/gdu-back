@@ -12,13 +12,18 @@ import javax.persistence.Id;
  * @author Thierry Dumas
  *
  */
+
+/*
+ * Définition de la Table RISQUES
+ *
+ */
 @Entity
 public class Risques {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 
-	private int id;
+	private Integer id;
 	/** id de la liste des risques */
 	private String nom;
 
@@ -27,7 +32,7 @@ public class Risques {
 	public Risques() {
 	}
 
-	public Risques(int id, String nom) {
+	public Risques(Integer id, String nom) {
 		super();
 		this.id = id;
 		this.nom = nom;
@@ -36,7 +41,7 @@ public class Risques {
 	/**
 	 * @return the id
 	 */
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
